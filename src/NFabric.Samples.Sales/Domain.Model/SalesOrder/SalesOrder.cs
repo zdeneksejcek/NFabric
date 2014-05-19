@@ -29,9 +29,11 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrder
             UpdateCommited(events);
         }
 
-        public void AddLine(ProductId product, SalesOrderLineQuantity quantity) {
+        public SalesOrderLine AddLine(ProductId product, SalesOrderLineQuantity quantity) {
             Update(
                 new SalesOrderLineAdded(product, quantity));
+
+            throw new NotImplementedException();
         }
 
         #region event handlers

@@ -8,6 +8,8 @@ namespace NFabric.Samples.Sales.Console
         public static void Main(string[] args)
         {
             SalesOrder so = new SalesOrder(new CustomerId(Guid.NewGuid()));
+            so.AddLine(null, null);
+
 
             System.Console.WriteLine("Hello World!");
         }
