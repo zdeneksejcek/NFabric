@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4CFA2491-C23B-46FE-B19C-44031F336608}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NFabric.Samples.Sales</RootNamespace>
+    <AssemblyName>NFabric.Samples.Sales</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="OpenDDD">
+      <HintPath>..\..\OpenDDD\src\OpenDDD\bin\Debug\OpenDDD.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain.Model\SalesOrder\SalesOrder.cs" />
+    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderCreated.cs" />
+    <Compile Include="Domain.Model\SalesOrder\SalesOrderId.cs" />
+    <Compile Include="Domain.Model\Customer\CustomerId.cs" />
+    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderLineAdded.cs" />
+    <Compile Include="Port\ProductId.cs" />
+    <Compile Include="Domain.Model\SalesOrder\SalesOrderLineQuantity.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Application\" />
+    <Folder Include="Domain.Model\" />
+    <Folder Include="Port\" />
+    <Folder Include="Domain.Model\SalesOrder\" />
+    <Folder Include="Domain.Model\SalesOrder\Events\" />
+    <Folder Include="Domain.Model\Customer\" />
+  </ItemGroup>
+</Project>

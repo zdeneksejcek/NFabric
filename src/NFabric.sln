@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric", "NFabric\NFabric.csproj", "{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Host", "NFabric.Host\NFabric.Host.csproj", "{AD6CE9AC-5DF0-4483-8F70-935C844082C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Tests", "NFabric.Tests\NFabric.Tests.csproj", "{BAB76146-A33D-4DDB-929B-CA2394FEE451}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{70658C3D-F5E2-45F9-BF1D-D41F8A90E254}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales", "NFabric.Samples.Sales\NFabric.Samples.Sales.csproj", "{4CFA2491-C23B-46FE-B19C-44031F336608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Console", "NFabric.Samples.Sales.Console\NFabric.Samples.Sales.Console.csproj", "{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CFA2491-C23B-46FE-B19C-44031F336608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CFA2491-C23B-46FE-B19C-44031F336608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CFA2491-C23B-46FE-B19C-44031F336608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CFA2491-C23B-46FE-B19C-44031F336608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CFA2491-C23B-46FE-B19C-44031F336608} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
+		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = NFabric.Samples.Sales.Console\NFabric.Samples.Sales.Console.csproj
+	EndGlobalSection
+EndGlobal
