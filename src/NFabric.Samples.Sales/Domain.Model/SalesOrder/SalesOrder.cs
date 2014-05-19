@@ -3,12 +3,10 @@ using OpenDDD.EventSourcing;
 using System.Collections.Generic;
 using OpenDDD;
 using NFabric.Samples.Sales.Domain.Model.SalesOrder.Events;
-using System.Diagnostics;
 using NFabric.Samples.Sales.Port;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrder
 {
-    [DebuggerDisplay("{Id.Id}")]
 	public class SalesOrder : AggregateWithES
 	{
         private SalesOrderId Id { get; set;}
