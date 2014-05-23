@@ -9,7 +9,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrder.Events
         public Guid ProductId { get; private set; }
         public int Quantity { get; private set; }
 
-        public SalesOrderLineAdded(ProductId productId, SalesOrderLineQuantity quantity)
+        public SalesOrderLineAdded(Guid salesOrder, ProductId productId, SalesOrderLineQuantity quantity) : base(salesOrder)
         {
             AssertArgumentNotNull(quantity, "Quantity cannot be null");
 

@@ -29,7 +29,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="OpenDDD">
-      <HintPath>..\..\OpenDDD\src\OpenDDD\bin\Debug\OpenDDD.dll</HintPath>
+      <HintPath>..\..\..\OpenDDD\src\OpenDDD\bin\Debug\OpenDDD.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +42,9 @@
     <Compile Include="Port\ProductId.cs" />
     <Compile Include="Domain.Model\SalesOrder\SalesOrderLineQuantity.cs" />
     <Compile Include="Domain.Model\SalesOrder\SalesOrderLine.cs" />
+    <Compile Include="ListensToEvents.cs" />
+    <Compile Include="BoundedContext.cs" />
+    <Compile Include="Domain.Model\SalesOrder\SalesOrderLines.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -51,5 +54,17 @@
     <Folder Include="Domain.Model\SalesOrder\" />
     <Folder Include="Domain.Model\SalesOrder\Events\" />
     <Folder Include="Domain.Model\Customer\" />
+    <Folder Include="Application\CommandHandlers\" />
+    <Folder Include="Application\EventHandlers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFabric.BoundedContext\NFabric.BoundedContext.csproj">
+      <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
+      <Name>NFabric.BoundedContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric\NFabric.csproj">
+      <Project>{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}</Project>
+      <Name>NFabric</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

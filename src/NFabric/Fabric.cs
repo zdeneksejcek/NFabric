@@ -2,9 +2,9 @@
 
 namespace NFabric
 {
-	public class MyClass
+    public class Fabric
 	{
-		public MyClass ()
+        public Fabric()
 		{
 		}
 	}

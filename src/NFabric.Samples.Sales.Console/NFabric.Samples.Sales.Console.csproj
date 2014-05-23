@@ -29,12 +29,29 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="OpenDDD">
-      <HintPath>..\..\OpenDDD\src\OpenDDD\bin\Debug\OpenDDD.dll</HintPath>
+      <HintPath>..\..\..\OpenDDD\src\OpenDDD\bin\Debug\OpenDDD.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\EasyNetQ.0.32.0.263\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CreateSalesOrder.cs" />
+    <Compile Include="RabbitMQGateway.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -42,5 +59,16 @@
       <Project>{4CFA2491-C23B-46FE-B19C-44031F336608}</Project>
       <Name>NFabric.Samples.Sales</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFabric.Client\NFabric.Client.csproj">
+      <Project>{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}</Project>
+      <Name>NFabric.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric.Common\NFabric.Common.csproj">
+      <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
+      <Name>NFabric.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

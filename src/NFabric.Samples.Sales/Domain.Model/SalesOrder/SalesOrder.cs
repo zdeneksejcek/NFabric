@@ -9,40 +9,47 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrder
 {
 	public class SalesOrder : AggregateWithES
 	{
-        private SalesOrderId Id { get; set;}
 		private CustomerId Customer { get; set; }
 
-        private SalesOrder() {
-            Handles<SalesOrderCreated>((e) => this.Apply(e));
-        }
-
-        public SalesOrder(CustomerId customer) : this()
+        public SalesOrder(CustomerId customer)
 		{
-            Update(
+            Id = Guid.NewGuid();
+            InitHandlers();
+
+            Events.Update(
                 new SalesOrderCreated(
                     new SalesOrderId(),
                     customer
             ));
 		}
 
-        public SalesOrder(IEnumerable<Event> events) : this() {
-            UpdateCommited(events);
+        public SalesOrder(Guid id, IEnumerable<Event> events) {
+            Id = id;
+            InitHandlers();
+
+            base.Events.UpdateCommited(events);
         }
 
-        public SalesOrderLine AddLine(ProductId product, SalesOrderLineQuantity quantity) {
-            Update(
-                new SalesOrderLineAdded(product, quantity));
-
-            throw new NotImplementedException();
+        public void AddLine(ProductId product, SalesOrderLineQuantity quantity) {
+            base.Events.Update(
+                new SalesOrderLineAdded(Id, product, quantity));
         }
 
         #region event handlers
 
+        private void InitHandlers() {
+            base.Events.Handles<SalesOrderCreated>(Id,this.Apply);
+        }
+
 		private void Apply(SalesOrderCreated @event)
         {
-            Id = @event.Id;
             Customer = @event.Customer;
 		}
+
+        private void Apply(SalesOrderLineAdded @event)
+        {
+
+        }
 
         #endregion
 	}

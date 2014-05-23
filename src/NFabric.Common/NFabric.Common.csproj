@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}</ProjectGuid>
+    <ProjectGuid>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NFabric</RootNamespace>
-    <AssemblyName>NFabric</AssemblyName>
+    <RootNamespace>NFabric.Common</RootNamespace>
+    <AssemblyName>NFabric.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,16 +28,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fabric.cs" />
-    <Compile Include="ICommandDeserializer.cs" />
-    <Compile Include="ICommandHandlerExecutor.cs" />
-    <Compile Include="BoundedContextDescriptor.cs" />
+    <Compile Include="IMessageDeserializer.cs" />
+    <Compile Include="IMessageSerializer.cs" />
+    <Compile Include="MessageEnvelope.cs" />
+    <Compile Include="MessageType.cs" />
+    <Compile Include="JsonMessageSerializer.cs" />
+    <Compile Include="JsonMessageDeserializer.cs" />
+    <Compile Include="MessageName.cs" />
+    <Compile Include="IMessageGateway.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Storage\" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

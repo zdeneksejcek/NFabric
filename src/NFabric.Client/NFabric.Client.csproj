@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}</ProjectGuid>
+    <ProjectGuid>{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NFabric</RootNamespace>
-    <AssemblyName>NFabric</AssemblyName>
+    <RootNamespace>NFabric.Client</RootNamespace>
+    <AssemblyName>NFabric.Client</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,13 +31,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fabric.cs" />
-    <Compile Include="ICommandDeserializer.cs" />
-    <Compile Include="ICommandHandlerExecutor.cs" />
-    <Compile Include="BoundedContextDescriptor.cs" />
+    <Compile Include="CommandDispatcher.cs" />
+    <Compile Include="IDispachesCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Storage\" />
+    <ProjectReference Include="..\NFabric.Common\NFabric.Common.csproj">
+      <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
+      <Name>NFabric.Common</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

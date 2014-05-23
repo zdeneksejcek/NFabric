@@ -5,12 +5,10 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrder.Events
 {
     public class SalesOrderCreated : Event
     {
-        public SalesOrderId Id { get; private set;}
         public CustomerId Customer { get; private set;}
 
-        public SalesOrderCreated(SalesOrderId id, CustomerId customer)
+        public SalesOrderCreated(Guid id, CustomerId customer) : base(id)
         {
-            Id = id;
             Customer = customer;
         }
     }
