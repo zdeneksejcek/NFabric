@@ -8,13 +8,15 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrder.Events
     {
         public Guid ProductId { get; private set; }
         public int Quantity { get; private set; }
+        public Guid Warehouse { get; private set; }
 
-        public SalesOrderLineAdded(Guid salesOrder, ProductId productId, SalesOrderLineQuantity quantity) : base(salesOrder)
+        public SalesOrderLineAdded(Guid salesOrder, ProductId productId, SalesOrderLineQuantity quantity, WarehouseId warehouse) : base(salesOrder)
         {
             AssertArgumentNotNull(quantity, "Quantity cannot be null");
 
             ProductId = productId;
             Quantity = quantity.Quantity;
+            Warehouse = warehouse;
         }
     }
 }

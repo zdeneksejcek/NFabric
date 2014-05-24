@@ -7,7 +7,9 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrder
     {
         public int Quantity { get { return base.Value; }}
 
-        public SalesOrderLineQuantity(int quantity) : base(quantity) { }
+        public SalesOrderLineQuantity(int quantity) : base(quantity) {
+            if (quantity < 1)
+                throw new Exception();
+        }
     }
 }
-

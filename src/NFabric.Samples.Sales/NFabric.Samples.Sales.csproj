@@ -36,7 +36,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain.Model\SalesOrder\SalesOrder.cs" />
     <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderCreated.cs" />
-    <Compile Include="Domain.Model\SalesOrder\SalesOrderId.cs" />
     <Compile Include="Domain.Model\Customer\CustomerId.cs" />
     <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderLineAdded.cs" />
     <Compile Include="Port\ProductId.cs" />
@@ -45,6 +44,8 @@
     <Compile Include="ListensToEvents.cs" />
     <Compile Include="BoundedContext.cs" />
     <Compile Include="Domain.Model\SalesOrder\SalesOrderLines.cs" />
+    <Compile Include="Port\WarehouseId.cs" />
+    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderLineRemoved.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

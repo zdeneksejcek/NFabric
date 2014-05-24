@@ -1,13 +1,13 @@
 ﻿using System;
 using OpenDDD;
+using OpenDDD.EventSourcing;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrder
 {
-    public class SalesOrderLine : Entity
+    public class SalesOrderLine : EntityWithES
     {
-        public SalesOrderLine()
+        public SalesOrderLine(AggregateEvents events) : base(events)
         {
         }
     }
 }
-

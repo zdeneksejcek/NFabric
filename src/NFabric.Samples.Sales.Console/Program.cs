@@ -27,7 +27,7 @@ namespace NFabric.Samples.Sales.Console
                 eventsCollection.Insert(document);
             }
 
-            var so = new SalesOrder(new CustomerId(Guid.NewGuid()));
+            var so = new SalesOrder(new CustomerId(Guid.NewGuid()), new NFabric.Samples.Sales.Port.WarehouseId());
             //so.AddLine(null, null);
 
             NFabric.Client.CommandDispatcher disp = new NFabric.Client.CommandDispatcher(new RabbitMQGateway());
