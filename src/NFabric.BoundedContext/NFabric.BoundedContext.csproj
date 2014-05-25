@@ -36,10 +36,10 @@
     <Compile Include="IBoundedContext.cs" />
     <Compile Include="DefaultBoundedContext.cs" />
     <Compile Include="EventRecord.cs" />
-    <Compile Include="IEventRecordsRepository.cs" />
     <Compile Include="ISnapshotsRepository.cs" />
     <Compile Include="Snapshot.cs" />
     <Compile Include="EventStream.cs" />
+    <Compile Include="IEventStreamRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
