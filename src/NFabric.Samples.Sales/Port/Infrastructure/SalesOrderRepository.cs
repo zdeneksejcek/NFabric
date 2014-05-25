@@ -7,10 +7,13 @@ namespace NFabric.Samples.Sales.Port.Infrastructure
     {
         public SalesOrderRepository()
         {
+
         }
 
         public SalesOrder GetBy(Guid id)
         {
+            //var so = new SalesOrder(id
+
             throw new NotImplementedException();
         }
 

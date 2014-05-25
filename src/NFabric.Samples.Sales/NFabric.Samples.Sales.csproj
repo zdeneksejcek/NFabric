@@ -34,33 +34,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain.Model\SalesOrder\SalesOrder.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderCreated.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderLineAdded.cs" />
     <Compile Include="Port\ProductId.cs" />
-    <Compile Include="Domain.Model\SalesOrder\SalesOrderLineQuantity.cs" />
-    <Compile Include="Domain.Model\SalesOrder\SalesOrderLine.cs" />
     <Compile Include="ListensToEvents.cs" />
     <Compile Include="BoundedContext.cs" />
-    <Compile Include="Domain.Model\SalesOrder\SalesOrderLines.cs" />
     <Compile Include="Port\WarehouseId.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderLineRemoved.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderCommandHandler.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\CreateSalesOrder.cs" />
-    <Compile Include="Domain.Model\SalesOrder\ISalesOrderRepository.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\AddSalesOrderLine.cs" />
     <Compile Include="Port\Infrastructure\SalesOrderRepository.cs" />
     <Compile Include="Port\Infrastructure\CustomerRepository.cs" />
     <Compile Include="Port\Infrastructure\CreditRepository.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderNotFound.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\ChangeOrderLineQuantity.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Events\SalesOrderLineQuantityChanged.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Exceptions\SalesOrderLineNotFound.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Shipment.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Invoice.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Invoices.cs" />
-    <Compile Include="Domain.Model\SalesOrder\InvoiceLine.cs" />
-    <Compile Include="Domain.Model\SalesOrder\Shipments.cs" />
     <Compile Include="Domain.Model\Customers\CustomerId.cs" />
     <Compile Include="Domain.Model\Customers\Customer.cs" />
     <Compile Include="Domain.Model\Customers\ICustomerRepository.cs" />
@@ -68,22 +53,44 @@
     <Compile Include="Domain.Model\Credits\Credit.cs" />
     <Compile Include="Domain.Model\Credits\CreditLines.cs" />
     <Compile Include="Domain.Model\Credits\CreditLine.cs" />
+    <Compile Include="Domain.Model\SalesOrders\SalesOrder.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderCreated.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderLineAdded.cs" />
+    <Compile Include="Domain.Model\SalesOrders\SalesOrderLine.cs" />
+    <Compile Include="Domain.Model\SalesOrders\SalesOrderLines.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderLineRemoved.cs" />
+    <Compile Include="Domain.Model\SalesOrders\ISalesOrderRepository.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderLineQuantityChanged.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Exceptions\SalesOrderLineNotFound.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Shipment.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Invoice.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Invoices.cs" />
+    <Compile Include="Domain.Model\SalesOrders\InvoiceLine.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Shipments.cs" />
+    <Compile Include="Domain.Model\LineQuantity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Application\" />
     <Folder Include="Domain.Model\" />
     <Folder Include="Port\" />
-    <Folder Include="Domain.Model\SalesOrder\" />
-    <Folder Include="Domain.Model\SalesOrder\Events\" />
     <Folder Include="Application\CommandHandlers\" />
     <Folder Include="Application\EventHandlers\" />
     <Folder Include="Application\CommandHandlers\SalesOrder\" />
     <Folder Include="Port\Infrastructure\" />
-    <Folder Include="Domain.Model\SalesOrder\Exceptions\" />
     <Folder Include="Domain.Model\Customers\" />
     <Folder Include="Domain.Model\Credits\" />
     <Folder Include="Domain.Model\Quotes\" />
+    <Folder Include="Domain.Model\CreditReasons\" />
+    <Folder Include="Domain.Model\CustomerTypes\" />
+    <Folder Include="Domain.Model\DeliveryMethods\" />
+    <Folder Include="Domain.Model\SalesGroups\" />
+    <Folder Include="Domain.Model\SalesPersons\" />
+    <Folder Include="Domain.Model\SellPriceTiers\" />
+    <Folder Include="Domain.Model\ShippingCompanies\" />
+    <Folder Include="Domain.Model\SalesOrders\" />
+    <Folder Include="Domain.Model\SalesOrders\Events\" />
+    <Folder Include="Domain.Model\SalesOrders\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFabric.BoundedContext\NFabric.BoundedContext.csproj">

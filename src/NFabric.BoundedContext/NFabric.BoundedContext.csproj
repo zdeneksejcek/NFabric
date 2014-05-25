@@ -35,6 +35,11 @@
     <Compile Include="EventDescriptor.cs" />
     <Compile Include="IBoundedContext.cs" />
     <Compile Include="DefaultBoundedContext.cs" />
+    <Compile Include="EventRecord.cs" />
+    <Compile Include="IEventRecordsRepository.cs" />
+    <Compile Include="ISnapshotsRepository.cs" />
+    <Compile Include="Snapshot.cs" />
+    <Compile Include="EventStream.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

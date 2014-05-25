@@ -2,6 +2,7 @@
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;
+using NFabric.Samples.Sales.Domain.Model;
 
 namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
 {
@@ -30,7 +31,7 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
 
             order.Lines.Add(
                 new ProductId(command.Product),
-                new SalesOrderLineQuantity(command.Quantity));
+                new LineQuantity(command.Quantity));
 
             _repository.Save(order);
         }
