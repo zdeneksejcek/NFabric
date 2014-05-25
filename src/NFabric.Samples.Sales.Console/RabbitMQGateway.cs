@@ -17,7 +17,7 @@ namespace NFabric.Samples.Sales.Console
         public void SendMessage(MessageEnvelope message)
         {
             Parallel.For(0, 500000, (i) => {
-                    _bus.Send("nfabric", message);
+                _bus.Send("nfabric", message);
             });
         }
     }

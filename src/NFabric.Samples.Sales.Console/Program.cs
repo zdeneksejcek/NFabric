@@ -1,7 +1,10 @@
 ﻿using System;
-using NFabric.Samples.Sales.Domain.Model.SalesOrder;
+using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using MongoDB.Bson;
 using System.Diagnostics;
+using NFabric.Samples.Sales.Port;
+using NFabric.Client;
+using NFabric.Samples.Sales.Domain.Model.Customers;
 
 namespace NFabric.Samples.Sales.Console
 {
@@ -9,12 +12,9 @@ namespace NFabric.Samples.Sales.Console
     {
         public static void Main(string[] args)
         {
-            Process proc = Process.GetCurrentProcess();
-
-
-            MongoDB.Driver.MongoClient client = new MongoDB.Driver.MongoClient();
+            /*
+             * MongoDB.Driver.MongoClient client = new MongoDB.Driver.MongoClient();
             var eventsCollection = client.GetServer().GetDatabase("nfabric").GetCollection("events");
-
 
             for (int i = 0; i < 50; i++)
             {
@@ -25,12 +25,15 @@ namespace NFabric.Samples.Sales.Console
                 };
 
                 eventsCollection.Insert(document);
-            }
+            } */
 
-            var so = new SalesOrder(new CustomerId(Guid.NewGuid()), new NFabric.Samples.Sales.Port.WarehouseId());
-            //so.AddLine(null, null);
+            var so = new SalesOrder(new CustomerId(Guid.NewGuid()), new WarehouseId(Guid.NewGuid()));
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new SalesOrderLineQuantity(5));
 
-            NFabric.Client.CommandDispatcher disp = new NFabric.Client.CommandDispatcher(new RabbitMQGateway());
+            var disp = new CommandDispatcher(new RabbitMQGateway());
+
             disp.Dispatch(
                 new CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 

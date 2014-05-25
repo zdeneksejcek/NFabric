@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenDDD.Common;
 
-namespace NFabric.Samples.Sales.Domain.Model.SalesOrder
+namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {
     public class SalesOrderLineQuantity : GenericValueObject<int>
     {

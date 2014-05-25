@@ -1,12 +1,9 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrderLines.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrder.cs">
     <Files>
-      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrder.cs" Line="34" Column="58" />
-      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrderLines.cs" Line="26" Column="72" />
-      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrderLineQuantity.cs" Line="13" Column="10" />
-      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrderLine.cs" Line="9" Column="69" />
-      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrder/Events/SalesOrderLineAdded.cs" Line="12" Column="125" />
+      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrder/SalesOrder.cs" Line="11" Column="3" />
+      <File FileName="NFabric.Samples.Sales.Console/Program.cs" Line="30" Column="114" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

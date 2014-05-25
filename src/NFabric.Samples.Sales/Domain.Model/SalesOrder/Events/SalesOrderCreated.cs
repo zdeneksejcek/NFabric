@@ -1,7 +1,8 @@
 ﻿using System;
 using OpenDDD;
+using NFabric.Samples.Sales.Domain.Model.Customers;
 
-namespace NFabric.Samples.Sales.Domain.Model.SalesOrder.Events
+namespace NFabric.Samples.Sales.Domain.Model.SalesOrders.Events
 {
     public class SalesOrderCreated : Event
     {

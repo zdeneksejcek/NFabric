@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenDDD;
 
-namespace NFabric.Samples.Sales.Domain.Model.SalesOrder.Events
+namespace NFabric.Samples.Sales.Domain.Model.SalesOrders.Events
 {
     public class SalesOrderLineRemoved : Event
     {

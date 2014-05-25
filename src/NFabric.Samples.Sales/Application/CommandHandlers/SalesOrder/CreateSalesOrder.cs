@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NFabric.Samples.Sales.Console
+namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
 {
     public class CreateSalesOrder
     {
@@ -14,3 +14,4 @@ namespace NFabric.Samples.Sales.Console
         }
     }
 }
+
