@@ -1,10 +1,10 @@
 ﻿using System;
-using OpenDDD.EventSourcing;
-using NFabric.Samples.Sales.Domain.Model.SalesOrders.Events;
 using NFabric.Samples.Sales.Port;
 using System.Collections.Generic;
 using System.Linq;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders.Exceptions;
+using NFabric.Samples.Sales.Events.SalesOrder;
+using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {
@@ -14,14 +14,14 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         public SalesOrderLines(Guid order, AggregateEvents events) : base(events) {
             Order = order;
-            events.Handles<SalesOrderLineAdded>(order, this.Apply);
+            events.Handles<SalesOrderLineAdded>(this.Apply);
         }
 
         #region line added
 
         public void Add(ProductId product, LineQuantity quantity) {
             Events.Update(
-                new SalesOrderLineAdded(Order, product, quantity));
+                new SalesOrderLineAdded(Order, product.Id, quantity.Quantity));
         }
 
         private void Apply(SalesOrderLineAdded @event)
@@ -38,12 +38,12 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         #region line removed
 
         public void Remove(Guid line) {
-            Events.Update(new SalesOrderLineRemoved(Order, line));
+            Events.Update(new SalesOrderLineRemoved(line));
         }
 
         private void Apply(SalesOrderLineRemoved @event)
         {
-            base.Collection.RemoveAll(p => p.Id == @event.Id);
+            base.Collection.RemoveAll(p => p.Id == @event.LineId);
         }
 
         #endregion
@@ -56,7 +56,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         }
 
         public void Apply(SalesOrderLineQuantityChanged @event) {
-            var line = base.Collection.FirstOrDefault(p => p.Id == @event.Line);
+            var line = base.Collection.FirstOrDefault(p => p.Id == @event.LineId);
 
             if (line == null)
                 throw new SalesOrderLineNotFound();

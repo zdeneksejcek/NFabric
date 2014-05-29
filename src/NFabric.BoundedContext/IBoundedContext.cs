@@ -1,5 +1,6 @@
 ﻿using System;
 using NFabric.Common;
+using System.Collections.Generic;
 
 namespace NFabric.BoundedContext
 {
@@ -8,7 +9,9 @@ namespace NFabric.BoundedContext
         string Name {get;}
         IListensToEvents ListensToEventsProvider { get; }
 
-        IMessageSerializer MessageSerializer {get;}
-        IMessageDeserializer MessageDeserializer {get;}
+        IMessageSerializer MessageSerializer { get; }
+        IMessageDeserializer MessageDeserializer { get; }
+
+        IList<object> ExecuteCommand(object command);
     }
 }

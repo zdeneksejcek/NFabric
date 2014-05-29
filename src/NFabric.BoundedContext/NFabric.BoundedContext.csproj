@@ -40,6 +40,23 @@
     <Compile Include="Snapshot.cs" />
     <Compile Include="EventStream.cs" />
     <Compile Include="IEventStreamRepository.cs" />
+    <Compile Include="Exceptions\ConcurrencyException.cs" />
+    <Compile Include="Proxy\IBoundedContextProxy.cs" />
+    <Compile Include="Proxy\BoundedContextProxy.cs" />
+    <Compile Include="Proxy\SampleCommand.cs" />
+    <Compile Include="ICommandHandler.cs" />
+    <Compile Include="IEventHandler.cs" />
+    <Compile Include="EventsAutoReflector.cs" />
+    <Compile Include="Domain\AggregateEvents.cs" />
+    <Compile Include="Domain\AggregateSnapshot.cs" />
+    <Compile Include="Domain\AggregateWithES.cs" />
+    <Compile Include="Domain\EntityListWithES.cs" />
+    <Compile Include="Domain\EntityWithES.cs" />
+    <Compile Include="Domain\Handler.cs" />
+    <Compile Include="Domain\IProducesEvents.cs" />
+    <Compile Include="Domain\SequencedEvent.cs" />
+    <Compile Include="Proxy\AppDomainLoader.cs" />
+    <Compile Include="Configuration\BoundexContextConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -47,5 +64,11 @@
       <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
       <Name>NFabric.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Proxy\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System;
-using OpenDDD;
-using OpenDDD.EventSourcing;
 using NFabric.Samples.Sales.Port;
+using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {

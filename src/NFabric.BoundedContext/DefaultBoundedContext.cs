@@ -1,5 +1,6 @@
 ﻿using System;
 using NFabric.Common;
+using System.Collections.Generic;
 
 namespace NFabric.BoundedContext
 {
@@ -23,6 +24,7 @@ namespace NFabric.BoundedContext
                 throw new NotImplementedException();
             }
         }
+
+        public abstract IList<object> ExecuteCommand(object obj);
     }
 }
-

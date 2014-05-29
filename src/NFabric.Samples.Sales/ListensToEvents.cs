@@ -1,13 +1,14 @@
 ﻿using System;
 using NFabric.BoundedContext;
+using System.Reflection;
 
 namespace NFabric.Samples.Sales
 {
     public class ListensToEvents : IListensToEvents
     {
-        public System.Collections.Generic.IEnumerable<EventDescriptor> GetEvents()
+        public System.Collections.Generic.IEnumerable<string> GetEvents()
         {
-            throw new NotImplementedException();
+            return new EventsAutoReflector(Assembly.GetExecutingAssembly()).GetEvents();
         }
     }
 }

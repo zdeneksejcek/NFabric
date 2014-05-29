@@ -5,6 +5,6 @@ namespace NFabric.BoundedContext
 {
     public interface IListensToEvents
     {
-        IEnumerable<EventDescriptor> GetEvents();
+        IEnumerable<string> GetEvents();
     }
 }

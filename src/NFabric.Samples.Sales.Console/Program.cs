@@ -1,17 +1,30 @@
 ﻿using System;
+using System.Linq;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using System.Diagnostics;
 using NFabric.Samples.Sales.Port;
 using NFabric.Client;
 using NFabric.Samples.Sales.Domain.Model.Customers;
 using NFabric.Samples.Sales.Domain.Model;
+using NFabric.Infrastructure.Mongo;
+using OpenDDD.EventSourcing;
+using NFabric.BoundedContext;
+using System.Collections.Generic;
+using OpenDDD;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace NFabric.Samples.Sales.Console
 {
     class MainClass
     {
+        private static MongoEventStreamRepository rep = new MongoEventStreamRepository();
+
         public static void Main(string[] args)
         {
+            System.Net.ServicePointManager.DefaultConnectionLimit = 100;
+
             /*
              * MongoDB.Driver.MongoClient client = new MongoDB.Driver.MongoClient();
             var eventsCollection = client.GetServer().GetDatabase("nfabric").GetCollection("events");
@@ -27,19 +40,100 @@ namespace NFabric.Samples.Sales.Console
                 eventsCollection.Insert(document);
             } */
 
-            var so = new SalesOrder(new CustomerId(Guid.NewGuid()), new WarehouseId(Guid.NewGuid()));
-            so.Lines.Add(
-                new ProductId(Guid.NewGuid()),
-                new LineQuantity(5));
+            //Run();
 
+            System.Diagnostics.Stopwatch sw = new Stopwatch();
+            var so = Guid.Parse("201b3994-c647-4060-ad9a-21d7b3dd023c");
+            var stream = rep.GetStream(so);
 
+            var stream2 = rep.GetStream(so);
+            var events2 = DeserializeEvents(stream2);
+            sw.Start();
+            var salesOrder2 = new SalesOrder(so, events2);
+
+            sw.Stop();
+            System.Console.WriteLine("sw = " + sw.ElapsedTicks);
 
             /*            var disp = new CommandDispatcher(new RabbitMQGateway());
 
             disp.Dispatch(
                 new CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 */
-            System.Console.WriteLine("Hello World!");
+            //System.Console.WriteLine("Hello World!");
         }
+
+        private static void Run() {
+            var so = new SalesOrder(new CustomerId(Guid.NewGuid()), new WarehouseId(Guid.NewGuid()));
+
+            var id = so.Id;
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(5));
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(39));
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(40));
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(1));
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(2));
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(3));
+
+            so.Lines.Add(
+                new ProductId(Guid.NewGuid()),
+                new LineQuantity(4));
+
+            var producesEvents = (IProducesEvents)so;
+
+            var events = producesEvents.GetUncommitedSequencedEvents();
+
+            var stream = CreateEventStream(events);
+
+            rep.Append(stream);
+        }
+
+        private static EventStream CreateEventStream(IEnumerable<SequencedEvent> events) {
+            var aggregateId = events.Select(p => p.Event.Id).Distinct().FirstOrDefault();
+
+            var eventsList = events.Select(
+                p => new EventRecord(
+                    aggregateId,
+                    p.Sequence,
+                    p.Event.GetType().AssemblyQualifiedName,
+                    Serialize(p.Event))).ToList();
+
+            return new EventStream(eventsList);
+        }
+
+        private static byte[] Serialize(object obj) {
+            return Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(obj));
+        }
+
+        private static IEnumerable<Event> DeserializeEvents(EventStream stream) {
+            var events = new List<Event>();
+
+            foreach (var e in stream.Events)
+            {
+                var type = Type.GetType(e.TypeName);
+                var json = Encoding.UTF8.GetString(e.Event);
+                
+                    events.Add((Event)Newtonsoft.Json.JsonConvert.DeserializeObject(json, type));
+            }
+
+            return events;
+        }
+
     }
 }

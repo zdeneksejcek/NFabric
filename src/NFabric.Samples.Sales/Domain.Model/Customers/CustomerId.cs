@@ -1,10 +1,13 @@
 ﻿using System;
-using OpenDDD.Common;
 
 namespace NFabric.Samples.Sales.Domain.Model.Customers
 {
-    public class CustomerId : IdValueObject
+    public class CustomerId
     {
-        public CustomerId(Guid id) : base(id) {}
+        public Guid Id { get; private set; }
+
+        public CustomerId(Guid id) {
+            Id = id;
+        }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
-using OpenDDD.EventSourcing;
 using System.Collections.Generic;
-using OpenDDD;
-using NFabric.Samples.Sales.Domain.Model.SalesOrders.Events;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;
+using NFabric.Samples.Sales.Domain.Model.SalesOrders.Snapshot;
+using NFabric.Samples.Sales.Events.SalesOrder;
+using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {
-	public class SalesOrder : AggregateWithES
+    public class SalesOrder : AggregateWithES
 	{
 		private CustomerId Customer { get; set; }
 
@@ -23,12 +23,18 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
             Id = Guid.NewGuid();
             Init();
             Events.Update(
-                new SalesOrderCreated(Id, customer));
+                new SalesOrderCreated(Id, customer.Id));
 		}
 
-        public SalesOrder(Guid id, IEnumerable<Event> events) {
+        public SalesOrder(Guid id, IEnumerable<object> events) {
             Id = id;
             Init();
+
+            base.Events.UpdateCommited(events);
+        }
+
+        public SalesOrder(SalesOrderSnapshot snapshot, IEnumerable<object> events) {
+            InitHandlers();
 
             base.Events.UpdateCommited(events);
         }
@@ -44,13 +50,13 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         #region event handlers
 
         private void InitHandlers() {
-            base.Events.Handles<SalesOrderCreated>(Id,this.Apply);
+            base.Events.Handles<SalesOrderCreated>(this.Apply);
         }
 
 		private void Apply(SalesOrderCreated @event)
         {
-            Customer = @event.Customer;
-		}
+            Customer = new CustomerId(@event.Customer);
+        }
 
         #endregion
 	}

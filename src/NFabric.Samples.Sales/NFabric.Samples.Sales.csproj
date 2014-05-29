@@ -28,9 +28,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="OpenDDD">
-      <HintPath>..\..\..\OpenDDD\src\OpenDDD\bin\Debug\OpenDDD.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -39,13 +36,10 @@
     <Compile Include="BoundedContext.cs" />
     <Compile Include="Port\WarehouseId.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderCommandHandler.cs" />
-    <Compile Include="Application\CommandHandlers\SalesOrder\CreateSalesOrder.cs" />
-    <Compile Include="Application\CommandHandlers\SalesOrder\AddSalesOrderLine.cs" />
     <Compile Include="Port\Infrastructure\SalesOrderRepository.cs" />
     <Compile Include="Port\Infrastructure\CustomerRepository.cs" />
     <Compile Include="Port\Infrastructure\CreditRepository.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderNotFound.cs" />
-    <Compile Include="Application\CommandHandlers\SalesOrder\ChangeOrderLineQuantity.cs" />
     <Compile Include="Domain.Model\Customers\CustomerId.cs" />
     <Compile Include="Domain.Model\Customers\Customer.cs" />
     <Compile Include="Domain.Model\Customers\ICustomerRepository.cs" />
@@ -54,13 +48,9 @@
     <Compile Include="Domain.Model\Credits\CreditLines.cs" />
     <Compile Include="Domain.Model\Credits\CreditLine.cs" />
     <Compile Include="Domain.Model\SalesOrders\SalesOrder.cs" />
-    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderCreated.cs" />
-    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderLineAdded.cs" />
     <Compile Include="Domain.Model\SalesOrders\SalesOrderLine.cs" />
     <Compile Include="Domain.Model\SalesOrders\SalesOrderLines.cs" />
-    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderLineRemoved.cs" />
     <Compile Include="Domain.Model\SalesOrders\ISalesOrderRepository.cs" />
-    <Compile Include="Domain.Model\SalesOrders\Events\SalesOrderLineQuantityChanged.cs" />
     <Compile Include="Domain.Model\SalesOrders\Exceptions\SalesOrderLineNotFound.cs" />
     <Compile Include="Domain.Model\SalesOrders\Shipment.cs" />
     <Compile Include="Domain.Model\SalesOrders\Invoice.cs" />
@@ -68,6 +58,9 @@
     <Compile Include="Domain.Model\SalesOrders\InvoiceLine.cs" />
     <Compile Include="Domain.Model\SalesOrders\Shipments.cs" />
     <Compile Include="Domain.Model\LineQuantity.cs" />
+    <Compile Include="Domain.Model\SalesOrders\SalesOrderVisitor.cs" />
+    <Compile Include="Domain.Model\SalesOrders\ISalesOrderSnapshotVisitor.cs" />
+    <Compile Include="Domain.Model\SalesOrders\Snapshot\SalesOrderSnapshot.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -89,17 +82,21 @@
     <Folder Include="Domain.Model\SellPriceTiers\" />
     <Folder Include="Domain.Model\ShippingCompanies\" />
     <Folder Include="Domain.Model\SalesOrders\" />
-    <Folder Include="Domain.Model\SalesOrders\Events\" />
     <Folder Include="Domain.Model\SalesOrders\Exceptions\" />
+    <Folder Include="Domain.Model\SalesOrders\Snapshot\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFabric.BoundedContext\NFabric.BoundedContext.csproj">
       <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
       <Name>NFabric.BoundedContext</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NFabric\NFabric.csproj">
-      <Project>{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}</Project>
-      <Name>NFabric</Name>
+    <ProjectReference Include="..\NFabric.Samples.Sales.Commands\NFabric.Samples.Sales.Commands.csproj">
+      <Project>{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}</Project>
+      <Name>NFabric.Samples.Sales.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric.Samples.Sales.Events\NFabric.Samples.Sales.Events.csproj">
+      <Project>{6EE3D914-534C-451C-90A8-1A13943C3ADA}</Project>
+      <Name>NFabric.Samples.Sales.Events</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

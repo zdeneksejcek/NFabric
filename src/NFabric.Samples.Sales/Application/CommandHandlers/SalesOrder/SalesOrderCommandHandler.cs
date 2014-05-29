@@ -3,10 +3,12 @@ using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;
 using NFabric.Samples.Sales.Domain.Model;
+using NFabric.BoundedContext;
+using NFabric.Samples.Sales.Commands.SalesOrder;
 
 namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
 {
-    public class SalesOrderCommandHandler : OpenDDD.ICommandHandler
+    public class SalesOrderCommandHandler : ICommandHandler<CreateSalesOrder>
     {
         ISalesOrderRepository _repository;
 
@@ -42,8 +44,9 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
             if (order == null)
                 throw new SalesOrderNotFound();
 
+            order.Lines.ChangeQuantity(command.Line, command.Quantity);
 
-
+            _repository.Save(order);
         }
     }
 }

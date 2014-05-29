@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenDDD.EventSourcing;
+using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.Customers
 {

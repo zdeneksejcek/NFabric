@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
+namespace NFabric.Samples.Sales.Commands.SalesOrder
 {
     public class AddSalesOrderLine
     {

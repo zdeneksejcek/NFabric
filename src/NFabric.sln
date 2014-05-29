@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric", "NFabric\NFabric.csproj", "{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Host", "NFabric.Host\NFabric.Host.csproj", "{AD6CE9AC-5DF0-4483-8F70-935C844082C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Tests", "NFabric.Tests\NFabric.Tests.csproj", "{BAB76146-A33D-4DDB-929B-CA2394FEE451}"
@@ -13,11 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales", "NF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Console", "NFabric.Samples.Sales.Console\NFabric.Samples.Sales.Console.csproj", "{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Query", "NFabric.Samples.Sales.Query\NFabric.Samples.Sales.Query.csproj", "{CB6E09E8-22B0-4BF6-8A1D-233B5BFAC692}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Commands", "NFabric.Samples.Sales.Commands\NFabric.Samples.Sales.Commands.csproj", "{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Events", "NFabric.Samples.Sales.Events\NFabric.Samples.Sales.Events.csproj", "{6EE3D914-534C-451C-90A8-1A13943C3ADA}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Client", "NFabric.Client\NFabric.Client.csproj", "{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.BoundedContext", "NFabric.BoundedContext\NFabric.BoundedContext.csproj", "{1463FB4A-1CBC-4084-8FFB-8894D3460101}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Common", "NFabric.Common\NFabric.Common.csproj", "{6BDEF486-C0C7-43DD-A092-D6E8541F1711}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Infrastructure.Mongo", "NFabric.Infrastructure.Mongo\NFabric.Infrastructure.Mongo.csproj", "{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +35,14 @@ Global
 		{1463FB4A-1CBC-4084-8FFB-8894D3460101}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1463FB4A-1CBC-4084-8FFB-8894D3460101}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1463FB4A-1CBC-4084-8FFB-8894D3460101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27EF8D9B-D8CD-4014-81DD-E132C2B29DC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36ED8548-96E8-40E3-9B4C-4C3292EFD65E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CFA2491-C23B-46FE-B19C-44031F336608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CFA2491-C23B-46FE-B19C-44031F336608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CFA2491-C23B-46FE-B19C-44031F336608}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,10 +51,18 @@ Global
 		{6BDEF486-C0C7-43DD-A092-D6E8541F1711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BDEF486-C0C7-43DD-A092-D6E8541F1711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BDEF486-C0C7-43DD-A092-D6E8541F1711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD6CE9AC-5DF0-4483-8F70-935C844082C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,12 +71,19 @@ Global
 		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB76146-A33D-4DDB-929B-CA2394FEE451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB6E09E8-22B0-4BF6-8A1D-233B5BFAC692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB6E09E8-22B0-4BF6-8A1D-233B5BFAC692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB6E09E8-22B0-4BF6-8A1D-233B5BFAC692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB6E09E8-22B0-4BF6-8A1D-233B5BFAC692}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4CFA2491-C23B-46FE-B19C-44031F336608} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
+		{CB6E09E8-22B0-4BF6-8A1D-233B5BFAC692} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
+		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
+		{6EE3D914-534C-451C-90A8-1A13943C3ADA} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = NFabric.Samples.Sales.Console\NFabric.Samples.Sales.Console.csproj
+		StartupItem = NFabric.Host\NFabric.Host.csproj
 	EndGlobalSection
 EndGlobal

@@ -66,6 +66,14 @@
       <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
       <Name>NFabric.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFabric.Infrastructure.Mongo\NFabric.Infrastructure.Mongo.csproj">
+      <Project>{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}</Project>
+      <Name>NFabric.Infrastructure.Mongo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric.BoundedContext\NFabric.BoundedContext.csproj">
+      <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
+      <Name>NFabric.BoundedContext</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
