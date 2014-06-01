@@ -8,7 +8,7 @@ namespace NFabric.Samples.Sales
     {
         public System.Collections.Generic.IEnumerable<string> GetEvents()
         {
-            return new EventsAutoReflector(Assembly.GetExecutingAssembly()).GetEvents();
+            return new EventHandlersAutoReflector(Assembly.GetExecutingAssembly()).GetEvents();
         }
     }
 }

@@ -28,6 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -43,7 +44,6 @@
     <Compile Include="Exceptions\ConcurrencyException.cs" />
     <Compile Include="Proxy\IBoundedContextProxy.cs" />
     <Compile Include="Proxy\BoundedContextProxy.cs" />
-    <Compile Include="Proxy\SampleCommand.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="IEventHandler.cs" />
     <Compile Include="EventsAutoReflector.cs" />
@@ -57,6 +57,9 @@
     <Compile Include="Domain\SequencedEvent.cs" />
     <Compile Include="Proxy\AppDomainLoader.cs" />
     <Compile Include="Configuration\BoundexContextConfiguration.cs" />
+    <Compile Include="Proxy\CommandMessage.cs" />
+    <Compile Include="Listeners\EventHandlerAddress.cs" />
+    <Compile Include="Listeners\CommandHandlerAddress.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -70,5 +73,6 @@
     <Folder Include="Proxy\" />
     <Folder Include="Domain\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Listeners\" />
   </ItemGroup>
 </Project>

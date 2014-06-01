@@ -9,9 +9,6 @@ namespace NFabric.BoundedContext
         string Name {get;}
         IListensToEvents ListensToEventsProvider { get; }
 
-        IMessageSerializer MessageSerializer { get; }
-        IMessageDeserializer MessageDeserializer { get; }
-
         IList<object> ExecuteCommand(object command);
     }
 }

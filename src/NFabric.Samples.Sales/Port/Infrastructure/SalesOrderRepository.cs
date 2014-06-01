@@ -6,17 +6,20 @@ namespace NFabric.Samples.Sales.Port.Infrastructure
 {
     public class SalesOrderRepository : ISalesOrderRepository
     {
-        private IEventStreamRepository _repository;
+        private IEventStreamRepository _events;
+        private ISnapshotsRepository _snapshots;
 
-        public SalesOrderRepository(IEventStreamRepository repository)
+        public SalesOrderRepository(IEventStreamRepository repository, ISnapshotsRepository snapshots)
         {
-            _repository = repository;
+            _events = repository;
+            _snapshots = snapshots;
         }
 
         public SalesOrder GetBy(Guid id)
         {
-            var events = _repository.GetStream(id);
-            //var so = new SalesOrder(id
+            var snapshot = _snapshots.GetBy(id);
+
+            var events = _events.GetStream(id);
 
             throw new NotImplementedException();
         }

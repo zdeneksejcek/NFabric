@@ -3,13 +3,12 @@ using System.Runtime.CompilerServices;
 
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
-using NFabric.Samples.Sales;
 
-[assembly: AssemblyTitle("NFabric.Samples.Sales")]
+[assembly: AssemblyTitle("NFabric.Infrastructure.RabbitMQ")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sales")]
+[assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("zdeneksejcek")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -25,3 +24,4 @@ using NFabric.Samples.Sales;
 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
+

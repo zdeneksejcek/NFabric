@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using NFabric.Host.Messaging;
 
 namespace NFabric.Host
 {
@@ -12,21 +15,31 @@ namespace NFabric.Host
 	{
 		public static void Main(string[] args)
 		{
-            var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
+            //var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
 
-            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
+            //var message = new Messaging.Message("Super Type");
 
-            Parallel.For(0, 5000, (i) => {
-                container.ExecuteCommand("Command you want " + i);
-            });
+            //container.ExecuteCommand(message);
 
-            sw.Stop();
+            Messaging.IServiceBus bus = CreateRabbitBus();
 
-            System.Console.WriteLine("Time elapsed: " + sw.ElapsedMilliseconds);
+            var bc = new BoundedContextDescriptor(
+                         "Sales",
+                         new List<string>{ "CreateSalesOrder", "AddSalesOrderLine" },
+                         new List<string>{ "SalesOrderCreated", "SalesOrderLineAdded" });
 
-            foreach (string @event in container.ListenedEvents)
-                System.Console.WriteLine(@event);
+            bus.EnsureBoundedContext(bc);
+
+            var pub = bus.CreateMessagePublisher();
+
+            bus.Dispose();
+        }
+
+        private static Messaging.IServiceBus CreateRabbitBus() {
+            var assembly = Assembly.LoadFile("NFabric.Infrastructure.RabbitMQ.dll");
+            var bus = assembly.CreateInstance("NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus", false, BindingFlags.CreateInstance, null, new object[] {"host=localhost"}, null, null) as Messaging.IServiceBus;
+
+            return bus;
         }
 	}
 }

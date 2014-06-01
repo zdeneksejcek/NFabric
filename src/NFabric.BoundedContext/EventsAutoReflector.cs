@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace NFabric.BoundedContext
 {
-    public class EventsAutoReflector : IListensToEvents
+    public class EventHandlersAutoReflector : IListensToEvents
     {
         private Assembly Assembly { get; set; }
 
-        public EventsAutoReflector(Assembly assembly)
+        public EventHandlersAutoReflector(Assembly assembly)
         {
             Assembly = assembly;
         }

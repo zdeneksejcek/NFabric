@@ -17,9 +17,14 @@ namespace NFabric.Samples.Sales
             get { return new ListensToEvents(); }
         }
 
-        public override IList<object> ExecuteCommand(object obj) {
-            System.Console.WriteLine("Command executed: " + obj.ToString());
+        public override IList<object> ExecuteCommand(object command) {
+            System.Console.WriteLine("Command executed: " + command.ToString());
 
+            return null;
+        }
+
+        public IList<object> ExecuteEvent(object @event) {
+            System.Console.WriteLine("Command event: " + @event.ToString());
             return null;
         }
     }

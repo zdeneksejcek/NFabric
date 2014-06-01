@@ -10,21 +10,6 @@ namespace NFabric.BoundedContext
 
         public abstract IListensToEvents ListensToEventsProvider { get; }
 
-        public IMessageSerializer MessageSerializer
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-        public IMessageDeserializer MessageDeserializer
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public abstract IList<object> ExecuteCommand(object obj);
     }
 }

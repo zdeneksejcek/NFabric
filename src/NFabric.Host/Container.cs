@@ -7,7 +7,7 @@ namespace NFabric.Host
     public class Container
     {
         private AppDomain Domain { get; set; }
-        private object BCObject { get; set; }
+        private object BCProxy { get; set; }
 
         private IList<string> _events;
         public IList<string> ListenedEvents { get { return _events; } }
@@ -20,15 +20,17 @@ namespace NFabric.Host
         }
 
         private void LoadContext(string bcAssembly, string nFabricBCAssembly) {
-            BCObject = Domain.CreateInstanceAndUnwrap(nFabricBCAssembly, "NFabric.BoundedContext.Proxy.AppDomainLoader", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { bcAssembly }, null, null);
+            BCProxy = Domain.CreateInstanceAndUnwrap(
+                nFabricBCAssembly,
+                "NFabric.BoundedContext.Proxy.BoundedContextProxy", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { bcAssembly }, null, null);
 
             _events = ExecuteMethod<IList<string>>("GetEventNames");
         }
 
         private T ExecuteMethod<T>(string name, object[] parameters = null) where T: class {
-            var method = BCObject.GetType().GetMethod(name);
+            var method = BCProxy.GetType().GetMethod(name);
 
-            return method.Invoke(BCObject, parameters) as T;
+            return method.Invoke(BCProxy, parameters) as T;
         }
 
         public IList<object> ExecuteCommand(object obj) {
@@ -36,4 +38,3 @@ namespace NFabric.Host
         }
     }
 }
-
