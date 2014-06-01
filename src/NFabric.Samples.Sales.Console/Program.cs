@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Linq;
+using NFabric.BoundedContext.Domain;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using System.Diagnostics;
 using NFabric.Samples.Sales.Port;
-using NFabric.Client;
 using NFabric.Samples.Sales.Domain.Model.Customers;
 using NFabric.Samples.Sales.Domain.Model;
 using NFabric.Infrastructure.Mongo;
-using OpenDDD.EventSourcing;
 using NFabric.BoundedContext;
 using System.Collections.Generic;
 using OpenDDD;
 using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace NFabric.Samples.Sales.Console
 {
@@ -105,7 +102,7 @@ namespace NFabric.Samples.Sales.Console
         }
 
         private static EventStream CreateEventStream(IEnumerable<SequencedEvent> events) {
-            var aggregateId = events.Select(p => p.Event.Id).Distinct().FirstOrDefault();
+            var aggregateId = events.Select(p => p.Event).Distinct().FirstOrDefault();
 
             var eventsList = events.Select(
                 p => new EventRecord(
