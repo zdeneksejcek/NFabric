@@ -29,10 +29,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MongoDB.Bson">
-      <HintPath>..\..\..\mongocsharpdriverbuild.3.0.0-build-0060\lib\net45\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>..\..\..\mongocsharpdriverbuild.3.0.0-build-0060\lib\net45\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
