@@ -15,23 +15,20 @@ namespace NFabric.BoundedContext.Proxy
             Context = loader.Context;
         }
 
-        public IList<object> ExecuteCommand(dynamic message)
+        public NFabric.Common.Messaging.Message[] ExecuteMessage(NFabric.Common.Messaging.Message dynMessage)
         {
-            var commandMessage = new CommandMessage(message);
+            //var message = new Message(dynMessage);
 
-            System.Console.WriteLine(commandMessage.Type);
+            //System.Console.WriteLine("{0} {1}.{2} {3}", message.Type, message.BoundedContext, message.Name, message.Body);
 
-            return null;
-            //return Context.ExecuteCommand(commandMessage);
+            return new NFabric.Common.Messaging.Message[]
+            {
+                new NFabric.Common.Messaging.Message("event", "Sales", "SalesOrderCreated", "body")
+            };
         }
 
-        public IList<string> GetEventNames() {
-            return Context.ListensToEventsProvider.GetEvents().ToList();
-        }
-
-        public IList<object> ExecuteEvent(object @event)
-        {
-            throw new NotImplementedException();
+        public string GetName() {
+            return Context.GetName();
         }
     }
 }

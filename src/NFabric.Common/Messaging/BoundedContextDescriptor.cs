@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NFabric.Host.Messaging
+namespace NFabric.Common.Messaging
 {
     public class BoundedContextDescriptor
     {

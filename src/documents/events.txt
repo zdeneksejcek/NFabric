@@ -1,0 +1,36 @@
+events in mongo
+	_id: ObjectId
+	AggId: guid
+	Seq: int
+	Name: SalesOrderCreated
+	Data: Json
+	AdditionalData: cokoliv bro
+
+projections:
+	SalesOrderCreated: Guid, Warehouse, Customer, Status, Currency, Cost?, Margin, Total (SubTotal)  -> adds row to SO table
+ 	SalesOrderLineAdded Guid, LineGuid, Quantity, Product
+	SalesOrderLineAdded Guid, LineGuid, Quantity, Product
+	SalesOrderLineRemoved Guid, LineGuid
+	SalesOrderCompleted Guid
+
+NFabric
+NFabric.Events
+NFabric.Cinema - query projections
+NFabric.Insight - tracebiliy of commands, events, testing etc.
+NFabric.Behave - BDD tests built int
+
+GET https://local.unleashedsoftware.com/api/v2/Journals/Shipment/a3efd3d6-dfc2-442c-8103-6bf3971e0140 HTTP/1.1
+api-auth-id: 764d7bcc-2fe0-4e26-a0c6-084e59521d0d
+api-auth-signature: Pzpvnu1j3QdmdRRTTzEz/n8T2Il/aPt9GuXmvQXsGeg=
+Accept: application/xml
+Content-Type: application/xml
+Host: local.unleashedsoftware.com
+Connection: Keep-Alive
+
+Unleashed.Async.Messages.AccountingExportNotification:Unleashed.Async.Messages
+
+CommandHandlerAddress:
+	Sales.CreateSalesOrder
+
+EventHandlerAddress:
+	Sales.SalesOrderHandler

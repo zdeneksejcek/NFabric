@@ -5,8 +5,7 @@ namespace NFabric.BoundedContext.Proxy
 {
     public interface IBoundedContextProxy
     {
-        IList<object> ExecuteCommand(object command);
-
-        IList<object> ExecuteEvent(object @event);
+        NFabric.Common.Messaging.Message[] ExecuteMessage(NFabric.Common.Messaging.Message message);
+        string GetName();
     }
 }

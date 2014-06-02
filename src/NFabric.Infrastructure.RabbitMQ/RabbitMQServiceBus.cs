@@ -1,5 +1,6 @@
 ﻿using System;
-using NFabric.Host.Messaging;
+using NFabric.Common.Messaging;
+using EasyNetQ;
 
 namespace NFabric.Infrastructure.RabbitMQ
 {
@@ -9,7 +10,8 @@ namespace NFabric.Infrastructure.RabbitMQ
 
         public RabbitMQServiceBus(string connectionString)
         {
-            _bus = EasyNetQ.RabbitHutch.CreateBus(connectionString).Advanced;
+            var logger = new Logger();
+            _bus = EasyNetQ.RabbitHutch.CreateBus(connectionString, x => x.Register<IEasyNetQLogger>(_ => logger)).Advanced;
         }
 
         public void Dispose()
@@ -40,7 +42,7 @@ namespace NFabric.Infrastructure.RabbitMQ
 
         public IMessageConsumer CreateMessageConsumer()
         {
-            return new MessageConsumer();
+            return new MessageConsumer(_bus);
         }
 
         #endregion

@@ -7,6 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>NFabric.BoundedContext</RootNamespace>
     <AssemblyName>NFabric.BoundedContext</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,7 +36,6 @@
     <Compile Include="IListensToEvents.cs" />
     <Compile Include="EventDescriptor.cs" />
     <Compile Include="IBoundedContext.cs" />
-    <Compile Include="DefaultBoundedContext.cs" />
     <Compile Include="EventRecord.cs" />
     <Compile Include="ISnapshotsRepository.cs" />
     <Compile Include="Snapshot.cs" />
@@ -57,9 +57,6 @@
     <Compile Include="Domain\SequencedEvent.cs" />
     <Compile Include="Proxy\AppDomainLoader.cs" />
     <Compile Include="Configuration\BoundexContextConfiguration.cs" />
-    <Compile Include="Proxy\CommandMessage.cs" />
-    <Compile Include="Listeners\EventHandlerAddress.cs" />
-    <Compile Include="Listeners\CommandHandlerAddress.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -73,6 +70,5 @@
     <Folder Include="Proxy\" />
     <Folder Include="Domain\" />
     <Folder Include="Configuration\" />
-    <Folder Include="Listeners\" />
   </ItemGroup>
 </Project>

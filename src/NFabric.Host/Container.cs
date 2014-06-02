@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Policy;
 using System.Collections.Generic;
+using NFabric.Common.Messaging;
 
 namespace NFabric.Host
 {
@@ -9,14 +10,17 @@ namespace NFabric.Host
         private AppDomain Domain { get; set; }
         private object BCProxy { get; set; }
 
-        private IList<string> _events;
-        public IList<string> ListenedEvents { get { return _events; } }
+        public string Name { get; private set; }
 
         public Container(string bcAssembly, string nFabricBCAssembly)
         {
-            Domain = AppDomainFactory.CreateDomain(bcAssembly, nFabricBCAssembly);
+            Domain = AppDomainFactory.CreateDomain();
 
             LoadContext(bcAssembly, nFabricBCAssembly);
+        }
+
+        public void Unload() {
+            AppDomain.Unload(Domain);
         }
 
         private void LoadContext(string bcAssembly, string nFabricBCAssembly) {
@@ -24,17 +28,18 @@ namespace NFabric.Host
                 nFabricBCAssembly,
                 "NFabric.BoundedContext.Proxy.BoundedContextProxy", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { bcAssembly }, null, null);
 
-            _events = ExecuteMethod<IList<string>>("GetEventNames");
+            Name = ExecuteMethod<string>("GetName");
         }
 
         private T ExecuteMethod<T>(string name, object[] parameters = null) where T: class {
             var method = BCProxy.GetType().GetMethod(name);
+            var invokeResult = method.Invoke(BCProxy, parameters);
 
-            return method.Invoke(BCProxy, parameters) as T;
+            return invokeResult as T;
         }
 
-        public IList<object> ExecuteCommand(object obj) {
-            return ExecuteMethod<IList<object>>("ExecuteCommand", new object[] { obj });
+        public NFabric.Common.Messaging.Message[] Execute(Message message) {
+            return ExecuteMethod<NFabric.Common.Messaging.Message[]>("ExecuteMessage", new object[] { message });
         }
     }
 }

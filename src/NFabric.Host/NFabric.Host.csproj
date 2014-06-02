@@ -7,6 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>NFabric.Host</RootNamespace>
     <AssemblyName>NFabric.Host</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,12 +37,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="AppDomainFactory.cs" />
-    <Compile Include="Messaging\Message.cs" />
-    <Compile Include="Messaging\IServiceBus.cs" />
-    <Compile Include="Messaging\IMessagePublisher.cs" />
-    <Compile Include="Messaging\IMessageConsumer.cs" />
-    <Compile Include="Messaging\BoundedContextDescriptor.cs" />
-    <Compile Include="Messaging\CommandMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -61,8 +56,13 @@
       <Project>{6EE3D914-534C-451C-90A8-1A13943C3ADA}</Project>
       <Name>NFabric.Samples.Sales.Events</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Messaging\" />
+    <ProjectReference Include="..\NFabric.Common\NFabric.Common.csproj">
+      <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
+      <Name>NFabric.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric.Infrastructure.RabbitMQ\NFabric.Infrastructure.RabbitMQ.csproj">
+      <Project>{09447076-3465-4F13-9D42-E26308938457}</Project>
+      <Name>NFabric.Infrastructure.RabbitMQ</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

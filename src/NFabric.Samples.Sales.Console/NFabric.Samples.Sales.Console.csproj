@@ -7,6 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>NFabric.Samples.Sales.Console</RootNamespace>
     <AssemblyName>NFabric.Samples.Sales.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

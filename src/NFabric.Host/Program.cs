@@ -7,7 +7,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using NFabric.Host.Messaging;
+using NFabric.Common.Messaging;
+using NFabric.Common;
 
 namespace NFabric.Host
 {
@@ -15,29 +16,43 @@ namespace NFabric.Host
 	{
 		public static void Main(string[] args)
 		{
-            //var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
+            var bus = CreateRabbitBus();
 
-            //var message = new Messaging.Message("Super Type");
+            MessageDispatcher disp = new MessageDispatcher(bus);
 
-            //container.ExecuteCommand(message);
+            for (var i = 0; i < 0; i++)
+            {
+                disp.DispatchCommand(
+                    new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 
-            Messaging.IServiceBus bus = CreateRabbitBus();
+                disp.DispatchEvents(
+                    new NFabric.Samples.Sales.Events.SalesOrder.SalesOrderCreated(Guid.NewGuid(), Guid.NewGuid()));
+            }
 
             var bc = new BoundedContextDescriptor(
                          "Sales",
                          new List<string>{ "CreateSalesOrder", "AddSalesOrderLine" },
                          new List<string>{ "SalesOrderCreated", "SalesOrderLineAdded" });
 
-            bus.EnsureBoundedContext(bc);
+            // deploy BC
+            //bus.EnsureBoundedContext(bc);
 
-            var pub = bus.CreateMessagePublisher();
+            var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
+            var cons = bus.CreateMessageConsumer();
 
+            var consume = cons.Consume("Sales", (m) => {
+                    var results = container.Execute(m);
+            });
+
+            System.Console.ReadLine();
+
+            consume.Dispose();
             bus.Dispose();
         }
 
-        private static Messaging.IServiceBus CreateRabbitBus() {
+        private static IServiceBus CreateRabbitBus() {
             var assembly = Assembly.LoadFile("NFabric.Infrastructure.RabbitMQ.dll");
-            var bus = assembly.CreateInstance("NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus", false, BindingFlags.CreateInstance, null, new object[] {"host=localhost"}, null, null) as Messaging.IServiceBus;
+            var bus = assembly.CreateInstance("NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus", false, BindingFlags.CreateInstance, null, new object[] {"host=localhost"}, null, null) as IServiceBus;
 
             return bus;
         }

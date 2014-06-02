@@ -1,14 +1,16 @@
 ﻿using System;
-using NFabric.Common;
 using System.Collections.Generic;
 
 namespace NFabric.BoundedContext
 {
     public interface IBoundedContext
     {
-        string Name {get;}
-        IListensToEvents ListensToEventsProvider { get; }
+        string GetName();
 
         IList<object> ExecuteCommand(object command);
+        IList<object> ExecuteEvent(object @event);
+
+
+
     }
 }

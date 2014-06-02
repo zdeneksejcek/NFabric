@@ -24,7 +24,7 @@ namespace NFabric.BoundedContext.Proxy
             {
                     Context = Activator.CreateInstance(bcObjType) as IBoundedContext;
 
-                    System.Console.WriteLine("Bounded Context: " + Context.Name);
+                    System.Console.WriteLine("Bounded Context: " + Context.GetName());
             }
         }
     }

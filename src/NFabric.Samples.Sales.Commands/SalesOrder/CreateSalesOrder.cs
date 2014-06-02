@@ -14,4 +14,3 @@ namespace NFabric.Samples.Sales.Commands.SalesOrder
         }
     }
 }
-

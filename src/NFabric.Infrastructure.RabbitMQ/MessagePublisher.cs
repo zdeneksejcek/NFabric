@@ -1,5 +1,5 @@
 ﻿using System;
-using NFabric.Host.Messaging;
+using NFabric.Common.Messaging;
 using EasyNetQ.Topology;
 
 namespace NFabric.Infrastructure.RabbitMQ
@@ -13,43 +13,31 @@ namespace NFabric.Infrastructure.RabbitMQ
             _bus = bus;
         }
 
-        public void PublishCommand(CommandMessage command) {
-            _bus.Publish(
-                new Exchange(command.BoundedContext),
-                string.Empty,
-                true,
-                true,
-                new MyMessage()
-            );
-        }
-
-        public void PublishEvent(params object[] @events) {
-
-        }
-
-        public class MyMessage : EasyNetQ.IMessage<string> {
-            #region IMessage implementation
-
-            public EasyNetQ.MessageProperties Properties
+        public void Publish(params Message[] messages) {
+            foreach (var m in messages)
             {
-                get
+                switch (m.Type)
                 {
-                    throw new NotImplementedException();
+                    case "event":
+                        _bus.Publish(
+                            new Exchange(m.Name),
+                            string.Empty,
+                            true,
+                            false,
+                            new NFabricMessage("event", m.Name, m.Body, m.BoundedContext)
+                        );
+                    break;
+                    case "command":
+                            _bus.Publish(
+                                new Exchange(m.BoundedContext),
+                                string.Empty,
+                                true,
+                                false,
+                                new NFabricMessage("command", m.Name, m.Body, m.BoundedContext)
+                            );
+                    break;
                 }
             }
-
-            public string Body
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            #endregion
-
-
         }
-
     }
 }

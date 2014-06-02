@@ -10,7 +10,7 @@ namespace NFabric.Host
 
         }
 
-        public static AppDomain CreateDomain(string bcAssembly, string nFabricBCAssembly) {
+        public static AppDomain CreateDomain() {
             AppDomainSetup domaininfo = new AppDomainSetup();
             domaininfo.ApplicationBase = System.Environment.CurrentDirectory;
             Evidence adevidence = AppDomain.CurrentDomain.Evidence;

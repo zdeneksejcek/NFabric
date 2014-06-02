@@ -5,19 +5,14 @@ using System.Threading;
 
 namespace NFabric.Samples.Sales
 {
-    public class BoundedContext : DefaultBoundedContext
+    public class BoundedContext : IBoundedContext
     {
-        public override string Name
+        public string GetName()
         {
-            get { return "Sales"; }
+            return "Sales";
         }
 
-        public override IListensToEvents ListensToEventsProvider
-        {
-            get { return new ListensToEvents(); }
-        }
-
-        public override IList<object> ExecuteCommand(object command) {
+        public IList<object> ExecuteCommand(object command) {
             System.Console.WriteLine("Command executed: " + command.ToString());
 
             return null;

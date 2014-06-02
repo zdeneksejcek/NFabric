@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NFabric.Host.Messaging
+namespace NFabric.Common.Messaging
 {
     public interface IServiceBus : IDisposable
     {
