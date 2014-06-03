@@ -2,14 +2,24 @@
 using NFabric.BoundedContext;
 using System.Collections.Generic;
 using System.Threading;
+using System.Reflection;
 
 namespace NFabric.Samples.Sales
 {
     public class BoundedContext : IBoundedContext
     {
+        public BoundedContext() {
+
+        }
+
         public string GetName()
         {
             return "Sales";
+        }
+
+        public HandledMessages GetHandledMessages()
+        {
+            return new Inspector(Assembly.GetExecutingAssembly()).GetHandledMessages();
         }
 
         public IList<object> ExecuteCommand(object command) {

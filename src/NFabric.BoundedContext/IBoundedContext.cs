@@ -10,7 +10,6 @@ namespace NFabric.BoundedContext
         IList<object> ExecuteCommand(object command);
         IList<object> ExecuteEvent(object @event);
 
-
-
+        HandledMessages GetHandledMessages();
     }
 }

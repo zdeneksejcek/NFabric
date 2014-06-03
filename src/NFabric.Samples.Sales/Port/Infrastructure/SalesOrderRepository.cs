@@ -1,6 +1,6 @@
 ﻿using System;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
-using NFabric.BoundedContext;
+using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.Samples.Sales.Port.Infrastructure
 {

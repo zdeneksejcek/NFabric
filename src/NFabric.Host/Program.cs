@@ -16,9 +16,13 @@ namespace NFabric.Host
 	{
 		public static void Main(string[] args)
 		{
-            var bus = CreateRabbitBus();
+            var assembly = typeof(NFabric.Samples.Sales.BoundedContext).Assembly;
 
-            MessageDispatcher disp = new MessageDispatcher(bus);
+            var inspector = new NFabric.BoundedContext.Inspector(assembly);
+            var handledMessages = inspector.GetHandledMessages();
+
+            var bus = CreateRabbitBus();
+            var disp = new MessageDispatcher(bus);
 
             for (var i = 0; i < 0; i++)
             {

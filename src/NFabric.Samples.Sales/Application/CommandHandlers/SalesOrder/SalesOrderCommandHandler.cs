@@ -8,7 +8,10 @@ using NFabric.Samples.Sales.Commands.SalesOrder;
 
 namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
 {
-    public class SalesOrderCommandHandler : ICommandHandler<CreateSalesOrder>
+    public class SalesOrderCommandHandler :
+                                ICommandHandler<CreateSalesOrder>,
+                                ICommandHandler<AddSalesOrderLine>,
+                                ICommandHandler<ChangeOrderLineQuantity>
     {
         ISalesOrderRepository _repository;
 

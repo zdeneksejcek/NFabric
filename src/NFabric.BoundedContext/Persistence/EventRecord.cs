@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NFabric.BoundedContext
+namespace NFabric.BoundedContext.Persistence
 {
     public class EventRecord
     {

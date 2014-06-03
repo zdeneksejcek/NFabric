@@ -1,6 +1,10 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.BoundedContext/Inspector.cs">
+    <Files>
+      <File FileName="NFabric.BoundedContext/Inspector.cs" Line="25" Column="74" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/zdeneksejcek/development/OpenSource/vFabric/vFabric.Samples.Sales.Console/Program.cs" line="12" column="1" />

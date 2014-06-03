@@ -12,7 +12,9 @@ namespace NFabric.BoundedContext.Proxy
         public AppDomainLoader(object assemblyName) {
             var assembly = Assembly.Load((string)assemblyName);
 
-            InitializeAppDomain(assembly);
+            this.Context = new AutoBoundedContext(assembly);
+
+            //InitializeAppDomain(assembly);
 
             System.Console.WriteLine("AppDomain loaded: "+assembly.FullName);
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-using NFabric.BoundedContext;
+using NFabric.BoundedContext.Persistence;
 using MongoDB.Driver;
 using System.Text;
 using System.Linq;

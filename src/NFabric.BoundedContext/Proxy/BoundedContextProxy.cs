@@ -15,9 +15,16 @@ namespace NFabric.BoundedContext.Proxy
             Context = loader.Context;
         }
 
-        public NFabric.Common.Messaging.Message[] ExecuteMessage(NFabric.Common.Messaging.Message dynMessage)
+        public NFabric.Common.Messaging.Message[] ExecuteMessage(NFabric.Common.Messaging.Message message)
         {
-            //var message = new Message(dynMessage);
+            switch (message.Type)
+            {
+                case "event":
+
+                case "command":
+
+                    break;
+            }
 
             //System.Console.WriteLine("{0} {1}.{2} {3}", message.Type, message.BoundedContext, message.Name, message.Body);
 
