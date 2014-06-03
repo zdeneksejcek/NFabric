@@ -6,20 +6,29 @@ namespace NFabric.BoundedContext
 {
     public class AutoBoundedContext : IBoundedContext
     {
-        private Inspector _inspector;
+        private string _bcName;
+        private ServiceRegistry _registry;
+        private HandledMessages _handledMessages;
+        private ServiceActivator _activator;
 
         public AutoBoundedContext(Assembly assembly)
         {
-            _inspector = new Inspector(assembly);
+            var inspector = new Inspector(assembly);
+
+            _activator = new ServiceActivator();
+            _bcName = inspector.GetBoundedContextName();
+            _registry = inspector.GetRegistry();
+            _handledMessages = inspector.GetHandledMessages();
         }
 
         public string GetName()
         {
-            return _inspector.GetBoundedContextName();
+            return _bcName;
         }
 
         public IList<object> ExecuteCommand(object command)
         {
+
             throw new NotImplementedException();
         }
 
@@ -30,7 +39,7 @@ namespace NFabric.BoundedContext
 
         public HandledMessages GetHandledMessages()
         {
-            return _inspector.GetHandledMessages();
+            return _handledMessages;
         }
     }
 }

@@ -100,4 +100,7 @@
       <Name>NFabric.Samples.Sales.Events</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="oldProgram.txt" />
+  </ItemGroup>
 </Project>

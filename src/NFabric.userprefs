@@ -1,8 +1,14 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.BoundedContext/Inspector.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.Host/Program.cs">
     <Files>
-      <File FileName="NFabric.BoundedContext/Inspector.cs" Line="25" Column="74" />
+      <File FileName="NFabric.Host/Program.cs" Line="38" Column="84" />
+      <File FileName="NFabric.BoundedContext/IBoundedContext.cs" Line="1" Column="1" />
+      <File FileName="NFabric.BoundedContext/AutoBoundedContext.cs" Line="1" Column="1" />
+      <File FileName="NFabric.Samples.Sales/Application/CommandHandlers/SalesOrder/SalesOrderCommandHandler.cs" Line="1" Column="1" />
+      <File FileName="NFabric.BoundedContext/ServiceRegistry.cs" Line="1" Column="1" />
+      <File FileName="NFabric.BoundedContext/ServiceActivator.cs" Line="1" Column="1" />
+      <File FileName="NFabric.Samples.Sales/oldProgram.txt" Line="63" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -11,7 +17,4 @@
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <DisabledProjects>
-    <String>NFabric.Samples.Sales.Console/NFabric.Samples.Sales.Console.csproj</String>
-  </DisabledProjects>
 </Properties>

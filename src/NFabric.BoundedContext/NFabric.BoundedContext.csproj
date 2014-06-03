@@ -60,6 +60,8 @@
     <Compile Include="Persistence\ISnapshotsRepository.cs" />
     <Compile Include="Persistence\Snapshot.cs" />
     <Compile Include="AutoBoundedContext.cs" />
+    <Compile Include="ServiceActivator.cs" />
+    <Compile Include="ServiceRegistry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

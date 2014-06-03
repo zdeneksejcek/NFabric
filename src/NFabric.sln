@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{70658C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales", "NFabric.Samples.Sales\NFabric.Samples.Sales.csproj", "{4CFA2491-C23B-46FE-B19C-44031F336608}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Console", "NFabric.Samples.Sales.Console\NFabric.Samples.Sales.Console.csproj", "{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Commands", "NFabric.Samples.Sales.Commands\NFabric.Samples.Sales.Commands.csproj", "{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Sales.Events", "NFabric.Samples.Sales.Events\NFabric.Samples.Sales.Events.csproj", "{6EE3D914-534C-451C-90A8-1A13943C3ADA}"
@@ -53,10 +51,6 @@ Global
 		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE3D914-534C-451C-90A8-1A13943C3ADA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341}.Release|Any CPU.Build.0 = Release|Any CPU
 		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{881CB7E8-817B-4BA7-87B1-E2F286FF7D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -72,7 +66,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4CFA2491-C23B-46FE-B19C-44031F336608} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
-		{7E1BD2B8-E9B0-4C37-BA14-CFBA2F1C1341} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 		{6EE3D914-534C-451C-90A8-1A13943C3ADA} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 	EndGlobalSection

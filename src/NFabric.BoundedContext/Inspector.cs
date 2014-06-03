@@ -47,6 +47,11 @@ namespace NFabric.BoundedContext
 
             return attr.Product;
         }
+
+        public ServiceRegistry GetRegistry() {
+            return new ServiceRegistry();
+        }
+
     }
 }
 
