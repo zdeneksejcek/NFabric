@@ -16,10 +16,10 @@ namespace NFabric.Host
 	{
 		public static void Main(string[] args)
 		{
-            var assembly = typeof(NFabric.Samples.Sales.BoundedContext).Assembly;
+            var assembly = typeof(NFabric.Samples.Sales.Port.ProductId).Assembly;
 
             var inspector = new NFabric.BoundedContext.Inspector(assembly);
-            var handledMessages = inspector.GetHandledMessages();
+            var registry = inspector.GetRegistry();
 
             var bus = CreateRabbitBus();
             var disp = new MessageDispatcher(bus);

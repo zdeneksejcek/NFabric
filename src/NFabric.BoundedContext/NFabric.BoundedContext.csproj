@@ -62,6 +62,8 @@
     <Compile Include="AutoBoundedContext.cs" />
     <Compile Include="ServiceActivator.cs" />
     <Compile Include="ServiceRegistry.cs" />
+    <Compile Include="ServiceDescriptor.cs" />
+    <Compile Include="ServiceType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

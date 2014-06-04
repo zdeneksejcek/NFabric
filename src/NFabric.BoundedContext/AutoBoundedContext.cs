@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using NFabric.Common.Messaging;
 
 namespace NFabric.BoundedContext
 {
@@ -26,20 +27,14 @@ namespace NFabric.BoundedContext
             return _bcName;
         }
 
-        public IList<object> ExecuteCommand(object command)
-        {
-
-            throw new NotImplementedException();
-        }
-
-        public IList<object> ExecuteEvent(object @event)
-        {
-            throw new NotImplementedException();
-        }
-
         public HandledMessages GetHandledMessages()
         {
             return _handledMessages;
+        }
+
+        public Message[] ExecuteMessage(Message message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

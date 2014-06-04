@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NFabric.Common.Messaging;
 
 namespace NFabric.BoundedContext
 {
@@ -7,8 +8,7 @@ namespace NFabric.BoundedContext
     {
         string GetName();
 
-        IList<object> ExecuteCommand(object command);
-        IList<object> ExecuteEvent(object @event);
+        Message[] ExecuteMessage(Message message);
 
         HandledMessages GetHandledMessages();
     }
