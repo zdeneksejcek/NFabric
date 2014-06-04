@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Reflection;
 using NFabric.Common.Messaging;
 using NFabric.Common;
+using NFabric.BoundedContext;
 
 namespace NFabric.Host
 {
@@ -16,10 +17,14 @@ namespace NFabric.Host
 	{
 		public static void Main(string[] args)
 		{
-            var assembly = typeof(NFabric.Samples.Sales.Port.ProductId).Assembly;
+            //var assembly = typeof(NFabric.Samples.Sales.Port.ProductId).Assembly;
 
-            var inspector = new NFabric.BoundedContext.Inspector(assembly);
-            var registry = inspector.GetRegistry();
+            var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
+            var results = container.Execute(new Message("command", "Sales", "CreateSalesOrder", ""));
+
+            //new AutoBoundedContext(assembly).ExecuteMessage(new Message("command", "Sales", "CreateSalesOrder", ""));
+
+            //var inspector = new NFabric.BoundedContext.Inspector(assembly);
 
             var bus = CreateRabbitBus();
             var disp = new MessageDispatcher(bus);
@@ -41,16 +46,18 @@ namespace NFabric.Host
             // deploy BC
             //bus.EnsureBoundedContext(bc);
 
-            var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
-            var cons = bus.CreateMessageConsumer();
+
+            //var cons = bus.CreateMessageConsumer();
+
+            /*
 
             var consume = cons.Consume("Sales", (m) => {
                     var results = container.Execute(m);
             });
-
+            */
             System.Console.ReadLine();
 
-            consume.Dispose();
+            //consume.Dispose();
             bus.Dispose();
         }
 

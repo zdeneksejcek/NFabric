@@ -16,10 +16,21 @@ namespace NFabric.BoundedContext
         {
             var inspector = new Inspector(assembly);
 
-            _activator = new ServiceActivator();
+            _activator = new ServiceActivator(assembly);
             _bcName = inspector.GetBoundedContextName();
             _registry = inspector.GetRegistry();
             _handledMessages = inspector.GetHandledMessages();
+        }
+
+        public Message[] ExecuteMessage(Message message)
+        {
+            var serviceDescriptor = _registry.GetCommandService(message.BoundedContext, message.Name);
+
+            _activator.ExecuteHandleMethod(serviceDescriptor.Implementation, serviceDescriptor.MessageType, (repository) => {
+
+            });
+
+            return null;
         }
 
         public string GetName()
@@ -32,9 +43,6 @@ namespace NFabric.BoundedContext
             return _handledMessages;
         }
 
-        public Message[] ExecuteMessage(Message message)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

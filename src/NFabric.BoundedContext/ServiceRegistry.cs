@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NFabric.BoundedContext
 {
@@ -12,8 +13,10 @@ namespace NFabric.BoundedContext
             _services = services;
         }
 
-        public ServiceDescriptor GetCommandService() {
-            return null;
+        public ServiceDescriptor GetCommandService(string messageBC, string messageName) {
+            var serviceDescriptor = _services.FirstOrDefault(p => p.MessageBC == messageBC && p.MessageName == messageName);
+
+            return serviceDescriptor;
         }
 
         public ServiceDescriptor[] GetEventServices() {

@@ -64,6 +64,8 @@
     <Compile Include="ServiceRegistry.cs" />
     <Compile Include="ServiceDescriptor.cs" />
     <Compile Include="ServiceType.cs" />
+    <Compile Include="Persistence\InMemoryEventStreamRepository.cs" />
+    <Compile Include="Persistence\InMemorySnapshotRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
