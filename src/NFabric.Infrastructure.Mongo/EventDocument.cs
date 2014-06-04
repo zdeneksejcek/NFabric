@@ -13,16 +13,16 @@ namespace NFabric.Infrastructure.Mongo
         public Guid AggId { get; private set; }
         public int Sequence { get; private set; }
         public string TypeName { get; private set; }
-        public byte[] Event { get; private set; }
-        public byte[] AdditionalData { get; private set; }
+        public string SerializedEvent { get; private set; }
+        public string AdditionalData { get; private set; }
 
-        public EventDocument(Guid aggId, int sequence, string typeName, byte[] @event, byte[] additionalData)
+        public EventDocument(Guid aggId, int sequence, string typeName, string serializedEvent, string serializedAdditionalData)
         {
             AggId = aggId;
             Sequence = sequence;
             TypeName = typeName;
-            Event = @event;
-            AdditionalData = additionalData;
+            SerializedEvent = serializedEvent;
+            AdditionalData = serializedAdditionalData;
         }
     }
 }

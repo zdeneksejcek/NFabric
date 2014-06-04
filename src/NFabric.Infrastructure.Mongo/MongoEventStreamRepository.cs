@@ -33,7 +33,7 @@ namespace NFabric.Infrastructure.Mongo
                                     p.AggId,
                                     p.Sequence,
                                     p.TypeName,
-                                    p.Event,
+                                    p.SerializedEvent,
                                     p.AdditionalData)).ToList();
 
             return new EventStream(records);
@@ -46,7 +46,7 @@ namespace NFabric.Infrastructure.Mongo
                     p.AggregateId,
                     p.Sequence,
                     p.TypeName,
-                    p.Event,
+                    p.SerializedEvent,
                     p.AdditionalData)).ToList();
 
             Collection.InsertBatch<EventDocument>(documents);

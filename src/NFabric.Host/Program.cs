@@ -17,11 +17,33 @@ namespace NFabric.Host
 	{
 		public static void Main(string[] args)
 		{
-            //var assembly = typeof(NFabric.Samples.Sales.Port.ProductId).Assembly;
+            var assembly = typeof(NFabric.Samples.Sales.Port.ProductId).Assembly;
+
+            var bc = new AutoBoundedContext(assembly);
 
             var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
-            var results = container.Execute(new Message("command", "Sales", "CreateSalesOrder", ""));
+            /*
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(
+                new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            for(int i=0; i<10000; i++)
+                {
+                    //bc.ExecuteMessage(new Message("command", "Sales", "CreateSalesOrder", json));
+
+                    var results = container.Execute(new Message("command", "Sales", "CreateSalesOrder", json));
+                    //Console.Write(".");
+                }
+
+            sw.Stop();
+            System.Console.ReadLine();
+            container.Unload();
+            System.Console.ReadLine();
+            Console.WriteLine("Elapsed time: {0}", sw.ElapsedMilliseconds);
+
+            */
             //new AutoBoundedContext(assembly).ExecuteMessage(new Message("command", "Sales", "CreateSalesOrder", ""));
 
             //var inspector = new NFabric.BoundedContext.Inspector(assembly);
@@ -34,31 +56,26 @@ namespace NFabric.Host
                 disp.DispatchCommand(
                     new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 
+                    /*
                 disp.DispatchEvents(
                     new NFabric.Samples.Sales.Events.SalesOrder.SalesOrderCreated(Guid.NewGuid(), Guid.NewGuid()));
+                    */
             }
-
-            var bc = new BoundedContextDescriptor(
-                         "Sales",
-                         new List<string>{ "CreateSalesOrder", "AddSalesOrderLine" },
-                         new List<string>{ "SalesOrderCreated", "SalesOrderLineAdded" });
 
             // deploy BC
             //bus.EnsureBoundedContext(bc);
 
-
-            //var cons = bus.CreateMessageConsumer();
-
-            /*
+            var cons = bus.CreateMessageConsumer();
 
             var consume = cons.Consume("Sales", (m) => {
                     var results = container.Execute(m);
+                    //Console.Write('.');
             });
-            */
-            System.Console.ReadLine();
+
+            //System.Console.ReadLine();
 
             //consume.Dispose();
-            bus.Dispose();
+            //bus.Dispose();
         }
 
         private static IServiceBus CreateRabbitBus() {

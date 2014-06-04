@@ -25,12 +25,15 @@ namespace NFabric.BoundedContext
         public Message[] ExecuteMessage(Message message)
         {
             var serviceDescriptor = _registry.GetCommandService(message.BoundedContext, message.Name);
+            var deserializedMessage =  Serializer.Deserialize(message.Body, serviceDescriptor.MessageType);
 
-            _activator.ExecuteHandleMethod(serviceDescriptor.Implementation, serviceDescriptor.MessageType, (repository) => {
-
+            _activator.ExecuteHandleMethod(
+                serviceDescriptor.Implementation,
+                serviceDescriptor.MessageType, deserializedMessage, (repository) => {
+                
             });
 
-            return null;
+            return new Message[0];
         }
 
         public string GetName()

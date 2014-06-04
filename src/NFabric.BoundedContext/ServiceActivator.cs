@@ -19,7 +19,7 @@ namespace NFabric.BoundedContext
             _container = builder.Build();
         }
 
-        public void ExecuteHandleMethod(Type type, Type messageType, Action<Persistence.IEventStreamRepository> block) {
+        public void ExecuteHandleMethod(Type type, Type messageType, object deserializedMessage, Action<Persistence.IEventStreamRepository> block) {
             using (var threadLifetime = _container.BeginLifetimeScope())
             {
                 var service = _container.Resolve(type);
@@ -27,7 +27,7 @@ namespace NFabric.BoundedContext
                 
                 var method = type.GetMethod("Handle", new Type[] {messageType});
 
-                method.Invoke(service, new object[] { null });
+                method.Invoke(service, new object[] { deserializedMessage });
 
                 block(repository);
             }
