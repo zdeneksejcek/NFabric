@@ -22,9 +22,9 @@ namespace NFabric.Host
             var bc = new AutoBoundedContext(assembly);
 
             var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext");
-            /*
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(
                 new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
+            /*
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -51,10 +51,13 @@ namespace NFabric.Host
             var bus = CreateRabbitBus();
             var disp = new MessageDispatcher(bus);
 
-            for (var i = 0; i < 0; i++)
+            for (var i = 0; i < 500000; i++)
             {
-                disp.DispatchCommand(
-                    new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
+                    disp.DispatchMessage(
+                        new UncommitedMessage("command", "Sales", "CreateSalesOrder", Guid.NewGuid(), DateTime.UtcNow, json));
+
+                    //disp.DispatchCommand(
+                    //new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 
                     /*
                 disp.DispatchEvents(
@@ -68,8 +71,8 @@ namespace NFabric.Host
             var cons = bus.CreateMessageConsumer();
 
             var consume = cons.Consume("Sales", (m) => {
-                    var results = container.Execute(m);
-                    //Console.Write('.');
+                    bc.ExecuteMessage(m);
+                    //var results = container.Execute(m);
             });
 
             //System.Console.ReadLine();
@@ -79,8 +82,10 @@ namespace NFabric.Host
         }
 
         private static IServiceBus CreateRabbitBus() {
-            var assembly = Assembly.LoadFile("NFabric.Infrastructure.RabbitMQ.dll");
-            var bus = assembly.CreateInstance("NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus", false, BindingFlags.CreateInstance, null, new object[] {"host=localhost"}, null, null) as IServiceBus;
+            //var assembly = Assembly.LoadFile("NFabric.Infrastructure.RabbitMQ.dll");
+            //var bus = assembly.CreateInstance("NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus", false, BindingFlags.CreateInstance, null, new object[] {"host=localhost"}, null, null) as IServiceBus;
+
+            var bus = new NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus("host=localhost");
 
             return bus;
         }

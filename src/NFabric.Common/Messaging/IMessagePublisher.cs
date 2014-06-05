@@ -4,7 +4,7 @@ namespace NFabric.Common.Messaging
 {
     public interface IMessagePublisher
     {
-        void Publish(params Message[] @messages);
+        void Publish(params UncommitedMessage[] @messages);
     }
 }
 

@@ -16,8 +16,10 @@ namespace NFabric.Infrastructure.RabbitMQ
         public IDisposable Consume(string bcName, Action<Message> onMessage) {
             var queue = new EasyNetQ.Topology.Queue(bcName, false);
 
-            return _bus.Consume<string>(queue,
-                (EasyNetQ.IMessage<string> message, EasyNetQ.MessageReceivedInfo info) => Receive(message, info, onMessage));
+            return _bus.Consume<string>(
+                queue,
+                (EasyNetQ.IMessage<string> message, EasyNetQ.MessageReceivedInfo info) => Receive(message, info, onMessage),
+                (configure) => { configure.WithPriority(0); });
         }
 
         private void Receive(EasyNetQ.IMessage<string> rabbitMessage, EasyNetQ.MessageReceivedInfo info, Action<Message> onMessage) {

@@ -5,7 +5,7 @@ namespace NFabric.BoundedContext.Domain
 {
     public interface IProducesEvents
     {
-        IEnumerable<SequencedEvent> GetUncommitedSequencedEvents();
+        IList<SequencedEvent> GetUncommitedSequencedEvents();
     }
 }
 

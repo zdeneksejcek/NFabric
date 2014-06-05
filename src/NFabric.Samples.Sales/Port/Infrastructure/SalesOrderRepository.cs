@@ -7,10 +7,10 @@ namespace NFabric.Samples.Sales.Port.Infrastructure
 {
     public class SalesOrderRepository : ISalesOrderRepository
     {
-        private IEventStreamRepository _events;
-        private ISnapshotsRepository _snapshots;
+        private InMemoryEventStreamRepository _events;
+        private InMemorySnapshotRepository _snapshots;
 
-        public SalesOrderRepository(IEventStreamRepository repository, ISnapshotsRepository snapshots)
+        public SalesOrderRepository(InMemoryEventStreamRepository repository, InMemorySnapshotRepository snapshots)
         {
             _events = repository;
             _snapshots = snapshots;
@@ -29,8 +29,9 @@ namespace NFabric.Samples.Sales.Port.Infrastructure
 
         public void Save(SalesOrder order)
         {
-            var producesEvents = (IProducesEvents)order;
-
+            var uncommitedEvents = ((IProducesEvents)order).GetUncommitedSequencedEvents();
+            
+            _events.Append(uncommitedEvents);
             //throw new NotImplementedException();
         }
     }

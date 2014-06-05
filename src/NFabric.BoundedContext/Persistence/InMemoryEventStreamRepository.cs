@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using NFabric.BoundedContext.Domain;
 
 namespace NFabric.BoundedContext.Persistence
 {
     public class InMemoryEventStreamRepository : IEventStreamRepository
     {
-        /*
-        IEventStreamRepository _persistentRepository;
+        private List<SequencedEvent> _uncommitedEvents = new List<SequencedEvent>();
+        public IList<SequencedEvent> UncommitedEvents { get { return _uncommitedEvents; } }
 
-        public InMemoryEventStreamRepository(IEventStreamRepository persistentRepository)
-        {
-            _persistentRepository = persistentRepository;
+        public InMemoryEventStreamRepository() {
+
         }
-        */
 
         public EventStream GetStream(Guid aggregateId, int? withSequenceHigherThan = default(int?))
         {
@@ -20,9 +20,9 @@ namespace NFabric.BoundedContext.Persistence
             return new EventStream(null);
         }
 
-        public void Append(EventStream stream)
+        public void Append(IList<SequencedEvent> events)
         {
-
+            _uncommitedEvents.AddRange(events);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace NFabric.BoundedContext
     {
         string GetName();
 
-        Message[] ExecuteMessage(Message message);
+        UncommitedMessage[] ExecuteMessage(Message message);
 
         HandledMessages GetHandledMessages();
     }

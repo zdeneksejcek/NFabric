@@ -9,13 +9,16 @@ namespace NFabric.BoundedContext.Domain
         private List<Handler> _handlers = new List<Handler>();
         private List<object> _uncommitedEvents = new List<object>();
         public int LastCommitedSequence { get; private set; }
+        public Func<Guid> GetAggregateIdMethod = null;
 
-        public AggregateEvents() {
+        public AggregateEvents(Func<Guid> getAggregateIdMethod) {
             LastCommitedSequence = -1;
+            GetAggregateIdMethod = getAggregateIdMethod;
         }
 
-        public AggregateEvents(int lastCommitedSequence) {
+        public AggregateEvents(int lastCommitedSequence, Func<Guid> getAggregateIdMethod) {
             LastCommitedSequence = lastCommitedSequence;
+            GetAggregateIdMethod = getAggregateIdMethod;
         }
 
         public void Handles<TEvent>(Action<TEvent> @handler) {
@@ -25,14 +28,16 @@ namespace NFabric.BoundedContext.Domain
                     e => @handler((TEvent)e)));
         }
 
-        IEnumerable<SequencedEvent> IProducesEvents.GetUncommitedSequencedEvents()
+        IList<SequencedEvent> IProducesEvents.GetUncommitedSequencedEvents()
         {
+            Guid aggregateId = GetAggregateIdMethod();
             var list = new List<SequencedEvent>();
             for (int i = 0; i < _uncommitedEvents.Count; i++)
                 list.Add(
                     new SequencedEvent(
+                        aggregateId,
                         LastCommitedSequence + i + 1,
-                        _uncommitedEvents.ElementAt(i)));
+                        _uncommitedEvents.ElementAt(i), DateTime.UtcNow));
 
             return list;
         }

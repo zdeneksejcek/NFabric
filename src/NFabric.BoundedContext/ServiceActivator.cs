@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using System.Reflection;
+using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.BoundedContext
 {
@@ -13,17 +14,18 @@ namespace NFabric.BoundedContext
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(assemblies).InstancePerDependency();
             builder.RegisterAssemblyTypes(assemblies).AsImplementedInterfaces().InstancePerDependency();
-            builder.RegisterType(typeof(Persistence.InMemoryEventStreamRepository)).AsImplementedInterfaces().InstancePerLifetimeScope();
-            builder.RegisterType(typeof(Persistence.InMemorySnapshotRepository)).AsImplementedInterfaces().InstancePerLifetimeScope();
+
+            builder.RegisterType(typeof(Persistence.InMemoryEventStreamRepository)).InstancePerLifetimeScope();
+            builder.RegisterType(typeof(Persistence.InMemorySnapshotRepository)).InstancePerLifetimeScope();
 
             _container = builder.Build();
         }
 
-        public void ExecuteHandleMethod(Type type, Type messageType, object deserializedMessage, Action<Persistence.IEventStreamRepository> block) {
+        public void ExecuteHandleMethod(Type type, Type messageType, object deserializedMessage, Action<Persistence.InMemoryEventStreamRepository> block) {
             using (var threadLifetime = _container.BeginLifetimeScope())
             {
-                var service = _container.Resolve(type);
-                var repository = _container.Resolve<Persistence.IEventStreamRepository>();
+                var service = threadLifetime.Resolve(type);
+                var repository = threadLifetime.Resolve<Persistence.InMemoryEventStreamRepository>();
                 
                 var method = type.GetMethod("Handle", new Type[] {messageType});
 
@@ -32,7 +34,6 @@ namespace NFabric.BoundedContext
                 block(repository);
             }
         }
-
     }
 }
 

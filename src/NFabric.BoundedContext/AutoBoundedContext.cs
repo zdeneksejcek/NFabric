@@ -2,6 +2,8 @@
 using System.Reflection;
 using System.Collections.Generic;
 using NFabric.Common.Messaging;
+using NFabric.BoundedContext.Domain;
+using System.Linq;
 
 namespace NFabric.BoundedContext
 {
@@ -22,18 +24,34 @@ namespace NFabric.BoundedContext
             _handledMessages = inspector.GetHandledMessages();
         }
 
-        public Message[] ExecuteMessage(Message message)
+        public UncommitedMessage[] ExecuteMessage(Message message)
         {
-            var serviceDescriptor = _registry.GetCommandService(message.BoundedContext, message.Name);
-            var deserializedMessage =  Serializer.Deserialize(message.Body, serviceDescriptor.MessageType);
+            try {
+                var serviceDescriptor = _registry.GetCommandService(message.BoundedContext, message.Name);
+                var deserializedMessage =  Serializer.Deserialize(message.Body, serviceDescriptor.MessageType);
 
-            _activator.ExecuteHandleMethod(
-                serviceDescriptor.Implementation,
-                serviceDescriptor.MessageType, deserializedMessage, (repository) => {
-                
-            });
+                UncommitedMessage[] uncommitedMessages = null;
 
-            return new Message[0];
+                _activator.ExecuteHandleMethod(
+                    serviceDescriptor.Implementation,
+                    serviceDescriptor.MessageType, deserializedMessage, (repository) => {
+                        uncommitedMessages = CreateUncommitedMessages(repository.UncommitedEvents);
+                });
+
+                return uncommitedMessages ?? new UncommitedMessage[0];
+            } catch (Exception ex) {
+                return new UncommitedMessage[0];
+            }
+        }
+
+        private UncommitedMessage[] CreateUncommitedMessages(IList<SequencedEvent> uncommitedEvents) {
+            return uncommitedEvents.Select(p => new UncommitedMessage(
+                    "event",
+                    GetName(),
+                    p.GetType().Name,
+                    p.AggregateId,
+                    p.CreatedOn,
+                    Serializer.Serialize(p.Event))).ToArray();
         }
 
         public string GetName()

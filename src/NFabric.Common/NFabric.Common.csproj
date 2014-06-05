@@ -29,9 +29,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -40,13 +37,10 @@
     <Compile Include="Messaging\IMessagePublisher.cs" />
     <Compile Include="Messaging\IServiceBus.cs" />
     <Compile Include="MessageDispatcher.cs" />
-    <Compile Include="MessageSerializer.cs" />
     <Compile Include="Messaging\Message.cs" />
+    <Compile Include="Messaging\UncommitedMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Messaging\" />
   </ItemGroup>

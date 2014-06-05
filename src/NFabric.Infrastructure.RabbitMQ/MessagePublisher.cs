@@ -13,7 +13,7 @@ namespace NFabric.Infrastructure.RabbitMQ
             _bus = bus;
         }
 
-        public void Publish(params Message[] messages) {
+        public void Publish(params UncommitedMessage[] messages) {
             foreach (var m in messages)
             {
                 switch (m.Type)

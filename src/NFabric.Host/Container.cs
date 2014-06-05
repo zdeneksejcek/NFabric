@@ -38,8 +38,8 @@ namespace NFabric.Host
             return invokeResult as T;
         }
 
-        public NFabric.Common.Messaging.Message[] Execute(Message message) {
-            return ExecuteMethod<NFabric.Common.Messaging.Message[]>("ExecuteMessage", new object[] { message });
+        public NFabric.Common.Messaging.UncommitedMessage[] Execute(Message message) {
+            return ExecuteMethod<NFabric.Common.Messaging.UncommitedMessage[]>("ExecuteMessage", new object[] { message });
         }
     }
 }

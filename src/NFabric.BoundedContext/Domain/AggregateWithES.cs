@@ -11,20 +11,20 @@ namespace NFabric.BoundedContext.Domain
         public Guid Id { get; protected set; }
 
         public AggregateWithES() {
-            Events = new AggregateEvents();
+            Events = new AggregateEvents(() => Id);
         }
 
         public AggregateWithES(IEnumerable<object> commitedEvents) {
-            Events = new AggregateEvents();
+            Events = new AggregateEvents(() => Id);
             Events.UpdateCommited(commitedEvents);
         }
 
         public AggregateWithES(int lastCommitedSequence, IEnumerable<object> commitedEvents) {
-            Events = new AggregateEvents(lastCommitedSequence);
+            Events = new AggregateEvents(lastCommitedSequence, () => Id);
             Events.UpdateCommited(commitedEvents);
         }
 
-        IEnumerable<SequencedEvent> IProducesEvents.GetUncommitedSequencedEvents()
+        IList<SequencedEvent> IProducesEvents.GetUncommitedSequencedEvents()
         {
             return ((IProducesEvents)Events).GetUncommitedSequencedEvents();
         }

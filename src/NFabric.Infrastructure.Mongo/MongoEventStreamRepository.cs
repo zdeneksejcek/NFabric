@@ -4,6 +4,8 @@ using MongoDB.Driver;
 using System.Text;
 using System.Linq;
 using MongoDB.Driver.Builders;
+using NFabric.BoundedContext.Domain;
+using System.Collections.Generic;
 
 namespace NFabric.Infrastructure.Mongo
 {
@@ -39,17 +41,19 @@ namespace NFabric.Infrastructure.Mongo
             return new EventStream(records);
         }
 
-        public void Append(EventStream stream)
+        public void Append(IList<SequencedEvent> events)
         {
-            var documents = stream.Events.Select(
+            /*
+            var documents = events.Select(
                 p=>new EventDocument(
                     p.AggregateId,
                     p.Sequence,
-                    p.TypeName,
+                    p.,
                     p.SerializedEvent,
                     p.AdditionalData)).ToList();
 
             Collection.InsertBatch<EventDocument>(documents);
+            */
         }
     }
 }

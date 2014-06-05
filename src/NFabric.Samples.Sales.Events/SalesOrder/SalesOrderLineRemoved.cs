@@ -2,6 +2,7 @@
 
 namespace NFabric.Samples.Sales.Events.SalesOrder
 {
+    [Serializable]
     public class SalesOrderLineRemoved
     {
         public Guid LineId { get; private set; }

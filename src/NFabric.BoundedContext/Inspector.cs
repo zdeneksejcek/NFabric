@@ -40,7 +40,11 @@ namespace NFabric.BoundedContext
             return type.GetGenericArguments().FirstOrDefault();
         }
 
-        private string GetBoundedContextName(Type type) {
+        public string GetMessageName(Type type) {
+            return type.Name;
+        }
+
+        public string GetBoundedContextName(Type type) {
             var attr = type.Assembly.GetCustomAttributes(typeof(AssemblyProductAttribute)).FirstOrDefault() as AssemblyProductAttribute;
 
             return attr.Product;

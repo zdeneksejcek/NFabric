@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NFabric.BoundedContext.Domain;
 
 namespace NFabric.BoundedContext.Persistence
 {
@@ -7,6 +8,6 @@ namespace NFabric.BoundedContext.Persistence
     {
         EventStream GetStream(Guid aggregateId, int? withSequenceHigherThan = null);
 
-        void Append(EventStream stream);
+        void Append(IList<SequencedEvent> events);
     }
 }

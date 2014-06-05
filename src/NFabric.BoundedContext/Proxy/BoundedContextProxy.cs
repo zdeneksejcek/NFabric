@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace NFabric.BoundedContext.Proxy
 {
-    public class BoundedContextProxy : MarshalByRefObject, IBoundedContextProxy
+    public class BoundedContextProxy : MarshalByRefObject
     {
         private IBoundedContext Context { get; set; }
 
@@ -15,7 +15,7 @@ namespace NFabric.BoundedContext.Proxy
             Context = loader.Context;
         }
 
-        public NFabric.Common.Messaging.Message[] ExecuteMessage(NFabric.Common.Messaging.Message message)
+        public NFabric.Common.Messaging.UncommitedMessage[] ExecuteMessage(NFabric.Common.Messaging.Message message)
         {
             return Context.ExecuteMessage(message);
         }
