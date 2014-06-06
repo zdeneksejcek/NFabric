@@ -61,6 +61,7 @@
     <Compile Include="Domain.Model\SalesOrders\ISalesOrderSnapshotVisitor.cs" />
     <Compile Include="Domain.Model\SalesOrders\Snapshot\SalesOrderSnapshot.cs" />
     <Compile Include="Application\EventHandlers\SalesOrderEventHandler.cs" />
+    <Compile Include="SalesBoundedContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

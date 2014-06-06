@@ -7,7 +7,7 @@ using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.BoundedContext.Proxy
 {
-    public class BoundedContextProxy : MarshalByRefObject
+    public class BoundedContextProxy : MarshalByRefObject, IBoundedContext
     {
         private IBoundedContext Context { get; set; }
 

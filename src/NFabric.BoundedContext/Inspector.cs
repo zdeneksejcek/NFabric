@@ -8,10 +8,20 @@ namespace NFabric.BoundedContext
     public class Inspector
     {
         private Assembly _assembly;
+        private IBoundedContextDescriptor _bcDescriptor;
 
         public Inspector(Assembly assembly)
         {
             _assembly = assembly;
+            _bcDescriptor = CreateBCDescriptor();
+        }
+
+        private IBoundedContextDescriptor CreateBCDescriptor() {
+            var bcDescriptorType = _assembly.GetExportedTypes().FirstOrDefault(p=>typeof(IBoundedContextDescriptor).IsAssignableFrom(p));
+            if (bcDescriptorType != null)
+                return Activator.CreateInstance(bcDescriptorType) as IBoundedContextDescriptor;
+
+            return null;
         }
 
         public HandledMessages GetHandledMessages() {
@@ -29,6 +39,7 @@ namespace NFabric.BoundedContext
         }
 
         public IList<MessageDescriptorWithType> GetDescriptorsWithTypes() {
+            /*
             var eventTypes = GetHandledTypes(typeof(IEventHandler<>));
             var commandTypes = GetHandledTypes(typeof(ICommandHandler<>));
 
@@ -39,6 +50,9 @@ namespace NFabric.BoundedContext
                 p => new MessageDescriptorWithType("command", p.Name, GetBoundedContextName(p), p)).ToList();
 
             return commandDescriptors.Concat(eventDescriptors).ToList();
+            */
+
+            return _bcDescriptor.GetMessageDescriptors();
         }
 
         private Type[] GetHandledTypes(Type genericType) {

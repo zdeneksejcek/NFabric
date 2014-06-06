@@ -28,11 +28,11 @@ namespace NFabric.Host
 
             var mongo = GetMongo();
 
-            var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext", mongo);
+            //var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext", mongo);
 
             var bc = new AutoBoundedContext(assembly, mongo);
-
-            var ids = mongo.GetSOs();
+            /*
+            var ids  = mongo.GetSOs();
             Random rand = new Random();
             
             foreach (var id in ids)
@@ -44,8 +44,20 @@ namespace NFabric.Host
                     disp.DispatchMessage(
                         new UncommitedMessage("command", "Sales", "AddSalesOrderLine", id, 0, DateTime.UtcNow, jsonNewLine));
                 }
+            */
 
-            for (var i = 0; i < 0; i++)
+            var cons = bus.CreateMessageConsumer();
+
+            var consume = cons.Consume("Sales", (m) => {
+                    //var results = container.Execute(m);
+
+                    var uncommitedMessages = bc.ExecuteMessage(m);
+                    mongo.Append(uncommitedMessages);
+
+                    //var results = container.Execute(m);
+                });
+
+            for (var i = 0; i < 500000; i++)
             {
                     disp.DispatchMessage(
                         new UncommitedMessage("command", "Sales", "CreateSalesOrder", Guid.NewGuid(), 0, DateTime.UtcNow, json));
@@ -61,16 +73,6 @@ namespace NFabric.Host
             // deploy BC
             //bus.EnsureBoundedContext(bc);
 
-            var cons = bus.CreateMessageConsumer();
-
-            var consume = cons.Consume("Sales", (m) => {
-                    //var results = container.Execute(m);
-
-                    var uncommitedMessages = bc.ExecuteMessage(m);
-                    mongo.Append(uncommitedMessages);
-
-                //var results = container.Execute(m);
-            });
 
             //System.Console.ReadLine();
 

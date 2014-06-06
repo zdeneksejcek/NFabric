@@ -73,6 +73,7 @@
     <Compile Include="Persistence\ISequencedEventsReader.cs" />
     <Compile Include="Persistence\IEventsReader.cs" />
     <Compile Include="MessageDescriptorWithType.cs" />
+    <Compile Include="IBoundedContextDescriptor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
