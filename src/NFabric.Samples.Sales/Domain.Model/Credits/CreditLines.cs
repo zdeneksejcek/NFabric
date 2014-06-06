@@ -6,7 +6,7 @@ namespace NFabric.Samples.Sales.Domain.Model.Credits
 {
     public class CreditLines : EntityCollectionWithES<CreditLine,List<CreditLine>>
     {
-        public CreditLines(AggregateEvents events) : base(events)
+        public CreditLines(AggregateEvents events, Func<Guid> getAggregateIdMethod) : base(events, getAggregateIdMethod)
         {
         }
     }

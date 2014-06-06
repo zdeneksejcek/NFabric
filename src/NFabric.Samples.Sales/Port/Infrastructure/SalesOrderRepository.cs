@@ -7,24 +7,25 @@ namespace NFabric.Samples.Sales.Port.Infrastructure
 {
     public class SalesOrderRepository : ISalesOrderRepository
     {
-        private InMemoryEventStreamRepository _events;
+        private InMemoryEventsRepository _events;
         private InMemorySnapshotRepository _snapshots;
+        private ISequencedEventsReader _reader;
 
-        public SalesOrderRepository(InMemoryEventStreamRepository repository, InMemorySnapshotRepository snapshots)
+        public SalesOrderRepository(
+            InMemoryEventsRepository repository,
+            ISequencedEventsReader reader,
+            InMemorySnapshotRepository snapshots)
         {
+            _reader = reader;
             _events = repository;
             _snapshots = snapshots;
         }
 
         public SalesOrder GetBy(Guid id)
         {
-            //var snapshot = _snapshots.GetBy(id);
+            var events = _reader.GetEvents(id);
 
-            var events = _events.GetStream(id);
-
-            //throw new NotImplementedException();
-
-            return new SalesOrder(new NFabric.Samples.Sales.Domain.Model.Customers.CustomerId(Guid.NewGuid()), new WarehouseId(Guid.NewGuid()));
+            return new SalesOrder(null, events);
         }
 
         public void Save(SalesOrder order)
@@ -32,7 +33,6 @@ namespace NFabric.Samples.Sales.Port.Infrastructure
             var uncommitedEvents = ((IProducesEvents)order).GetUncommitedSequencedEvents();
             
             _events.Append(uncommitedEvents);
-            //throw new NotImplementedException();
         }
     }
 }

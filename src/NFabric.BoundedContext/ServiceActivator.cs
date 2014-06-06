@@ -9,23 +9,24 @@ namespace NFabric.BoundedContext
     {
         Autofac.IContainer _container;
 
-        public ServiceActivator(params Assembly[] assemblies)
+        public ServiceActivator(ISequencedEventsReader reader, params Assembly[] assemblies)
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(assemblies).InstancePerDependency();
             builder.RegisterAssemblyTypes(assemblies).AsImplementedInterfaces().InstancePerDependency();
 
-            builder.RegisterType(typeof(Persistence.InMemoryEventStreamRepository)).InstancePerLifetimeScope();
+            builder.Register<ISequencedEventsReader>(c => reader);
+            builder.RegisterType(typeof(Persistence.InMemoryEventsRepository)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(Persistence.InMemorySnapshotRepository)).InstancePerLifetimeScope();
 
             _container = builder.Build();
         }
 
-        public void ExecuteHandleMethod(Type type, Type messageType, object deserializedMessage, Action<Persistence.InMemoryEventStreamRepository> block) {
+        public void ExecuteHandleMethod(Type type, Type messageType, object deserializedMessage, Action<Persistence.InMemoryEventsRepository> block) {
             using (var threadLifetime = _container.BeginLifetimeScope())
             {
                 var service = threadLifetime.Resolve(type);
-                var repository = threadLifetime.Resolve<Persistence.InMemoryEventStreamRepository>();
+                var repository = threadLifetime.Resolve<Persistence.InMemoryEventsRepository>();
                 
                 var method = type.GetMethod("Handle", new Type[] {messageType});
 

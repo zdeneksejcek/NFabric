@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
+using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.BoundedContext.Proxy
 {
@@ -9,10 +10,10 @@ namespace NFabric.BoundedContext.Proxy
     {
         public IBoundedContext Context { get; private set; }
 
-        public AppDomainLoader(object assemblyName) {
+        public AppDomainLoader(object assemblyName, IEventsReader reader) {
             var assembly = Assembly.Load((string)assemblyName);
 
-            this.Context = new AutoBoundedContext(assembly);
+            this.Context = new AutoBoundedContext(assembly, reader);
 
             //InitializeAppDomain(assembly);
 

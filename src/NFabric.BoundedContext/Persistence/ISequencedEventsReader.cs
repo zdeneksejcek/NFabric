@@ -4,8 +4,9 @@ using NFabric.BoundedContext.Domain;
 
 namespace NFabric.BoundedContext.Persistence
 {
-    public interface IEventsRepository
+    public interface ISequencedEventsReader
     {
-        void Append(IList<SequencedEvent> events);
+        IList<SequencedEvent> GetEvents(Guid aggregateId, int? withSequenceHigherThan = null);
     }
 }
+

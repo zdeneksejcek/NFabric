@@ -14,12 +14,12 @@ namespace NFabric.BoundedContext.Domain
             Events = new AggregateEvents(() => Id);
         }
 
-        public AggregateWithES(IEnumerable<object> commitedEvents) {
+        public AggregateWithES(IEnumerable<SequencedEvent> commitedEvents) {
             Events = new AggregateEvents(() => Id);
             Events.UpdateCommited(commitedEvents);
         }
 
-        public AggregateWithES(int lastCommitedSequence, IEnumerable<object> commitedEvents) {
+        public AggregateWithES(int lastCommitedSequence, IEnumerable<SequencedEvent> commitedEvents) {
             Events = new AggregateEvents(lastCommitedSequence, () => Id);
             Events.UpdateCommited(commitedEvents);
         }

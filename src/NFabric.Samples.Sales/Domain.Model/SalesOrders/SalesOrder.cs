@@ -26,15 +26,15 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
                 new SalesOrderCreated(Id, customer.Id));
 		}
 
-        public SalesOrder(Guid id, IEnumerable<object> events) {
+        public SalesOrder(Guid id, IEnumerable<SequencedEvent> events) {
             Id = id;
             Init();
 
             base.Events.UpdateCommited(events);
         }
 
-        public SalesOrder(SalesOrderSnapshot snapshot, IEnumerable<object> events) {
-            InitHandlers();
+        public SalesOrder(SalesOrderSnapshot snapshot, IEnumerable<SequencedEvent> events) {
+            Init();
 
             base.Events.UpdateCommited(events);
         }
@@ -42,9 +42,9 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         private void Init() {
             InitHandlers();
 
-            Lines = new SalesOrderLines(Id, base.Events);
-            Invoices = new Invoices(Id, base.Events);
-            Shipments = new Shipments(Id, base.Events);
+            Lines = new SalesOrderLines(base.Events, () => base.Id);
+            Invoices = new Invoices(base.Events, () => base.Id);
+            Shipments = new Shipments(base.Events, () => base.Id);
         }
 
         #region event handlers
@@ -55,6 +55,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
 		private void Apply(SalesOrderCreated @event)
         {
+            Id = @event.SalesOrderId;
             Customer = new CustomerId(@event.Customer);
         }
 

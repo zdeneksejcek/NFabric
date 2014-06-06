@@ -28,6 +28,19 @@ namespace NFabric.BoundedContext
             ).ToList();
         }
 
+        public IList<MessageDescriptorWithType> GetDescriptorsWithTypes() {
+            var eventTypes = GetHandledTypes(typeof(IEventHandler<>));
+            var commandTypes = GetHandledTypes(typeof(ICommandHandler<>));
+
+            var eventDescriptors = eventTypes.Select(
+                p => new MessageDescriptorWithType("event", p.Name, GetBoundedContextName(p), p)).ToList();
+
+            var commandDescriptors = commandTypes.Select(
+                p => new MessageDescriptorWithType("command", p.Name, GetBoundedContextName(p), p)).ToList();
+
+            return commandDescriptors.Concat(eventDescriptors).ToList();
+        }
+
         private Type[] GetHandledTypes(Type genericType) {
             var interfaces = _assembly.GetExportedTypes().SelectMany(p=>p.GetInterfaces()).Where(
                 x => x.IsGenericType && x.GetGenericTypeDefinition() == genericType
@@ -58,11 +71,11 @@ namespace NFabric.BoundedContext
 
         public ServiceRegistry GetRegistry() {
             var eventHandlersDescriptors = GetEventHandlersDescriptors(ServiceType.EventHandler, typeof(IEventHandler<>)); 
-            var commandHandlersDescriptors = GetEventHandlersDescriptors(ServiceType.CommandHandler, typeof(ICommandHandler<>)); 
+            var commandHandlersDescriptors = GetEventHandlersDescriptors(ServiceType.CommandHandler, typeof(ICommandHandler<>));
 
             var bothLists = eventHandlersDescriptors.Concat(commandHandlersDescriptors).ToList();
 
-            return new ServiceRegistry(bothLists);
+            return new ServiceRegistry(bothLists, GetDescriptorsWithTypes());
         }
 
         private static IList<ServiceTuple> GetServiceTuples(Type type, Type genericType) {

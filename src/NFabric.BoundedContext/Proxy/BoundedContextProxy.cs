@@ -3,6 +3,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.BoundedContext.Proxy
 {
@@ -10,8 +11,8 @@ namespace NFabric.BoundedContext.Proxy
     {
         private IBoundedContext Context { get; set; }
 
-        public BoundedContextProxy(string bcAssembly) {
-            AppDomainLoader loader = new AppDomainLoader(bcAssembly);
+        public BoundedContextProxy(string bcAssembly, IEventsReader reader) {
+            AppDomainLoader loader = new AppDomainLoader(bcAssembly, reader);
             Context = loader.Context;
         }
 

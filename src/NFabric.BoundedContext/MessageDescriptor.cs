@@ -5,12 +5,12 @@ namespace NFabric.BoundedContext
     [Serializable]
     public class MessageDescriptor
     {
-        public string Type { get; private set; }
+        public string MessageType { get; private set; }
         public string MessageName { get; private set; }
         public string MessageBC { get; private set;}
 
-        public MessageDescriptor(string type, string messageName, string messageBC) {
-            Type = type;
+        public MessageDescriptor(string messageType, string messageName, string messageBC) {
+            MessageType = messageType;
             MessageName = messageName;
             MessageBC = messageBC;
         }

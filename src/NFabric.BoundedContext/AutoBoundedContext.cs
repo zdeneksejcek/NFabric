@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NFabric.Common.Messaging;
 using NFabric.BoundedContext.Domain;
 using System.Linq;
+using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.BoundedContext
 {
@@ -14,13 +15,13 @@ namespace NFabric.BoundedContext
         private HandledMessages _handledMessages;
         private ServiceActivator _activator;
 
-        public AutoBoundedContext(Assembly assembly)
+        public AutoBoundedContext(Assembly assembly, IEventsReader reader)
         {
             var inspector = new Inspector(assembly);
 
-            _activator = new ServiceActivator(assembly);
             _bcName = inspector.GetBoundedContextName();
             _registry = inspector.GetRegistry();
+            _activator = new ServiceActivator(new SequencedEventsReader(reader, _registry), assembly);
             _handledMessages = inspector.GetHandledMessages();
         }
 
@@ -45,11 +46,13 @@ namespace NFabric.BoundedContext
         }
 
         private UncommitedMessage[] CreateUncommitedMessages(IList<SequencedEvent> uncommitedEvents) {
-            return uncommitedEvents.Select(p => new UncommitedMessage(
+            return uncommitedEvents.Select(
+                p => new UncommitedMessage(
                     "event",
                     GetName(),
-                    p.GetType().Name,
+                    p.Event.GetType().Name,
                     p.AggregateId,
+                    p.Sequence,
                     p.CreatedOn,
                     Serializer.Serialize(p.Event))).ToArray();
         }

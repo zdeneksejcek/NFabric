@@ -2,6 +2,7 @@
 using System.Security.Policy;
 using System.Collections.Generic;
 using NFabric.Common.Messaging;
+using NFabric.BoundedContext.Persistence;
 
 namespace NFabric.Host
 {
@@ -12,21 +13,21 @@ namespace NFabric.Host
 
         public string Name { get; private set; }
 
-        public Container(string bcAssembly, string nFabricBCAssembly)
+        public Container(string bcAssembly, string nFabricBCAssembly, IEventsReader reader)
         {
             Domain = AppDomainFactory.CreateDomain();
 
-            LoadContext(bcAssembly, nFabricBCAssembly);
+            LoadContext(bcAssembly, nFabricBCAssembly, reader);
         }
 
         public void Unload() {
             AppDomain.Unload(Domain);
         }
 
-        private void LoadContext(string bcAssembly, string nFabricBCAssembly) {
+        private void LoadContext(string bcAssembly, string nFabricBCAssembly, IEventsReader reader) {
             BCProxy = Domain.CreateInstanceAndUnwrap(
                 nFabricBCAssembly,
-                "NFabric.BoundedContext.Proxy.BoundedContextProxy", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { bcAssembly }, null, null);
+                "NFabric.BoundedContext.Proxy.BoundedContextProxy", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { bcAssembly, reader }, null, null);
 
             Name = ExecuteMethod<string>("GetName");
         }

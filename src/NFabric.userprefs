@@ -1,19 +1,23 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.Host/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NFabric.Infrastructure.Mongo/MongoEventStreamRepository.cs">
     <Files>
-      <File FileName="NFabric.Host/Program.cs" Line="38" Column="84" />
-      <File FileName="NFabric.BoundedContext/IBoundedContext.cs" Line="1" Column="1" />
-      <File FileName="NFabric.BoundedContext/AutoBoundedContext.cs" Line="1" Column="1" />
-      <File FileName="NFabric.Samples.Sales/Application/CommandHandlers/SalesOrder/SalesOrderCommandHandler.cs" Line="1" Column="1" />
-      <File FileName="NFabric.BoundedContext/ServiceRegistry.cs" Line="1" Column="1" />
-      <File FileName="NFabric.BoundedContext/ServiceActivator.cs" Line="1" Column="1" />
-      <File FileName="NFabric.Samples.Sales/oldProgram.txt" Line="63" Column="27" />
+      <File FileName="NFabric.Host/Program.cs" Line="70" Column="1" />
+      <File FileName="NFabric.Samples.Sales/Domain.Model/SalesOrders/SalesOrder.cs" Line="56" Column="47" />
+      <File FileName="NFabric.BoundedContext/Domain/AggregateEvents.cs" Line="45" Column="44" />
+      <File FileName="NFabric.Samples.Sales/Port/Infrastructure/SalesOrderRepository.cs" Line="36" Column="1" />
+      <File FileName="NFabric.BoundedContext/Domain/Handler.cs" Line="8" Column="9" />
+      <File FileName="NFabric.BoundedContext/AutoBoundedContext.cs" Line="46" Column="1" />
+      <File FileName="NFabric.Infrastructure.Mongo/MongoEventStreamRepository.cs" Line="77" Column="2" />
+      <File FileName="NFabric.BoundedContext/Domain/AggregateWithES.cs" Line="30" Column="1" />
+      <File FileName="NFabric.Samples.Sales/Application/CommandHandlers/SalesOrder/SalesOrderCommandHandler.cs" Line="42" Column="1" />
+      <File FileName="NFabric.BoundedContext/ServiceActivator.cs" Line="37" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/zdeneksejcek/development/OpenSource/vFabric/vFabric.Samples.Sales.Console/Program.cs" line="12" column="1" />
+      <Breakpoint file="/Users/zdeneksejcek/development/OpenSource/NFabric/src/NFabric.Host/Program.cs" line="70" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

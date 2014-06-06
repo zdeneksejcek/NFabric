@@ -47,5 +47,9 @@
       <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
       <Name>NFabric.BoundedContext</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFabric.Common\NFabric.Common.csproj">
+      <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
+      <Name>NFabric.Common</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

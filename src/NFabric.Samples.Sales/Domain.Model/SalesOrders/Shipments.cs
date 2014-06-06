@@ -8,9 +8,9 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
     {
         private Guid Order { get; set; }
 
-        public Shipments(Guid order, AggregateEvents events) : base(events)
+        public Shipments(AggregateEvents events, Func<Guid> getAggregateIdMethod) : base(events,getAggregateIdMethod)
         {
-            Order = order;
+
         }
 
 

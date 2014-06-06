@@ -10,10 +10,9 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {
     public class SalesOrderLines : EntityCollectionWithES<SalesOrderLine,List<SalesOrderLine>>
     {
-        private Guid Order { get; set; }
+        private Guid Order { get { return base.AggregateId; }}
 
-        public SalesOrderLines(Guid order, AggregateEvents events) : base(events) {
-            Order = order;
+        public SalesOrderLines(AggregateEvents events, Func<Guid> getAggregateIdMethod) : base(events, getAggregateIdMethod) {
             events.Handles<SalesOrderLineAdded>(this.Apply);
         }
 

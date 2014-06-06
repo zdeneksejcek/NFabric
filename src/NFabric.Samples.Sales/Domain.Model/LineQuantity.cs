@@ -10,6 +10,8 @@ namespace NFabric.Samples.Sales.Domain.Model
         {
             if (quantity < 1)
                 throw new LineMustbePositive();
+
+            Quantity = quantity;
         }
     }
 

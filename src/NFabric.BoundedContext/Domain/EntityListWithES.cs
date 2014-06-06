@@ -9,10 +9,18 @@ namespace NFabric.BoundedContext.Domain
 
         protected TCollection Collection { get; private set; }
 
-        public EntityCollectionWithES(AggregateEvents events)
+        private  Func<Guid> _getAggregateIdMethod;
+        protected Guid AggregateId {
+            get {
+                return _getAggregateIdMethod();
+            }
+        }
+
+        public EntityCollectionWithES(AggregateEvents events, Func<Guid> getAggregateIdMethod)
         {
             Events = events;
             Collection = new TCollection();
+            _getAggregateIdMethod = getAggregateIdMethod;
         }
     }
 }

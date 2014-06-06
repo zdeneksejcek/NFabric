@@ -36,27 +36,36 @@ namespace NFabric.BoundedContext.Domain
                 list.Add(
                     new SequencedEvent(
                         aggregateId,
-                        LastCommitedSequence + i + 1,
+                        LastCommitedSequence + i +1,
                         _uncommitedEvents.ElementAt(i), DateTime.UtcNow));
 
             return list;
         }
 
         public void Update(object @event) {
-            Apply(@event);
+            ApplyUncommited(@event);
 
             _uncommitedEvents.Add(@event);
         }
 
-        public void UpdateCommited(IEnumerable<object> events) {
+        public void UpdateCommited(IEnumerable<SequencedEvent> events) {
             foreach (var e in events)
                 Apply(e);
         }
 
-        private void Apply(object @event) {
+        private void ApplyUncommited(object @event) {
             var handler = _handlers.Where(p => p.Type == @event.GetType()).FirstOrDefault();
             if (handler != null)
                 handler.Handle(@event);
+        }
+
+        private void Apply(SequencedEvent @event) {
+            var handler = _handlers.Where(p => p.Type == @event.Event.GetType()).FirstOrDefault();
+            if (handler != null)
+            {
+                handler.Handle(@event.Event);
+                LastCommitedSequence += 1;
+            }
         }
     }
 }
