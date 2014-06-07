@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,6 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arguments\Arguments.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Container.cs" />
@@ -49,18 +50,6 @@
     <ProjectReference Include="..\NFabric.BoundedContext\NFabric.BoundedContext.csproj">
       <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
       <Name>NFabric.BoundedContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NFabric.Samples.Sales\NFabric.Samples.Sales.csproj">
-      <Project>{4CFA2491-C23B-46FE-B19C-44031F336608}</Project>
-      <Name>NFabric.Samples.Sales</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NFabric.Samples.Sales.Commands\NFabric.Samples.Sales.Commands.csproj">
-      <Project>{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}</Project>
-      <Name>NFabric.Samples.Sales.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NFabric.Samples.Sales.Events\NFabric.Samples.Sales.Events.csproj">
-      <Project>{6EE3D914-534C-451C-90A8-1A13943C3ADA}</Project>
-      <Name>NFabric.Samples.Sales.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\NFabric.Common\NFabric.Common.csproj">
       <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>

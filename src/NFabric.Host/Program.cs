@@ -1,85 +1,84 @@
 ﻿using System;
-using NFabric.BoundedContext.Proxy;
-using System.Security.Policy;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Linq;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using NFabric.Common.Messaging;
-using NFabric.Common;
 using NFabric.BoundedContext;
+using NFabric.Infrastructure.Mongo;
 
 namespace NFabric.Host
 {
 	class MainClass
 	{
-   		public static void Main(string[] args)
-		{
-            var assembly = typeof(NFabric.Samples.Sales.Port.ProductId).Assembly;
+	    private static void Consume(Message m, AutoBoundedContext bc, MongoEventStreamRepository mongo)
+	    {
+            var uncommitedMessages = bc.ExecuteMessage(m);
+            mongo.Append(uncommitedMessages);
+	    }
 
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(
-                new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
+   		public static void Main(string[] args)
+   		{
+   		    var arguments = new Arguments.Arguments(args);
+   		    var makeAboslute = Environment.CurrentDirectory + Path.DirectorySeparatorChar + arguments.BCFileName;
+
+            var assembly = Assembly.LoadFile(makeAboslute);
 
             var bus = CreateRabbitBus();
-            var disp = new MessageDispatcher(bus);
+            //var disp = new MessageDispatcher(bus);
 
             var mongo = GetMongo();
 
-            //var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext", mongo);
-
             var bc = new AutoBoundedContext(assembly, mongo);
-            var ids  = mongo.GetSOs();
-            var rand = new Random();
 
             var cons = bus.CreateMessageConsumer();
 
-            var consume = cons.Consume("Sales", (m) => {
-                    //var results = container.Execute(m);
-                    var uncommitedMessages = bc.ExecuteMessage(m);
-                    mongo.Append(uncommitedMessages);
+            using (var consume = cons.Consume(bc.GetName(), m => Consume(m, bc, mongo)))
+   		    {
+   		        Console.ReadLine();
+   		    }
 
-                    //var results = container.Execute(m);
-                });
+            //var ids  = mongo.GetSOs();
+            //var rand = new Random();
 
-            while (false)
-            {
-                var id = ids[rand.Next(0, 5000)];
+            //var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext", mongo);
 
-                string jsonNewLine = Newtonsoft.Json.JsonConvert.SerializeObject(
-                    new NFabric.Samples.Sales.Commands.SalesOrder.AddSalesOrderLine(id, Guid.NewGuid(), rand.Next(1, 100)
-                    ));
+            //string json = Newtonsoft.Json.JsonConvert.SerializeObject(
+            //    new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 
-                disp.DispatchMessage(
-                    new UncommitedMessage("command", "Sales", "AddSalesOrderLine", id, 0, DateTime.UtcNow, jsonNewLine));
-            }
+            //while (false)
+            //{
+            //    var id = ids[rand.Next(0, 5000)];
 
-            if (false) { Guid id = Guid.Empty;
-            //foreach (var id in ids) {
-                    string jsonNewLine = Newtonsoft.Json.JsonConvert.SerializeObject(
-                            new NFabric.Samples.Sales.Commands.SalesOrder.AddSalesOrderLine(id, Guid.NewGuid(), rand.Next(1, 100)
-                        ));
+            //    string jsonNewLine = Newtonsoft.Json.JsonConvert.SerializeObject(
+            //        new NFabric.Samples.Sales.Commands.SalesOrder.AddSalesOrderLine(id, Guid.NewGuid(), rand.Next(1, 100)
+            //        ));
 
-                    disp.DispatchMessage(
-                        new UncommitedMessage("command", "Sales", "AddSalesOrderLine", id, 0, DateTime.UtcNow, jsonNewLine));
-                }
+            //    disp.DispatchMessage(
+            //        new UncommitedMessage("command", "Sales", "AddSalesOrderLine", id, 0, DateTime.UtcNow, jsonNewLine));
+            //}
+
+            //if (false) { Guid id = Guid.Empty;
+            ////foreach (var id in ids) {
+            //        string jsonNewLine = Newtonsoft.Json.JsonConvert.SerializeObject(
+            //                new NFabric.Samples.Sales.Commands.SalesOrder.AddSalesOrderLine(id, Guid.NewGuid(), rand.Next(1, 100)
+            //            ));
+
+            //        disp.DispatchMessage(
+            //            new UncommitedMessage("command", "Sales", "AddSalesOrderLine", id, 0, DateTime.UtcNow, jsonNewLine));
+            //    }
 
 
 
-            for (var i = 0; i < 0; i++)
-            {
-                    disp.DispatchMessage(
-                        new UncommitedMessage("command", "Sales", "CreateSalesOrder", Guid.NewGuid(), 0, DateTime.UtcNow, json));
+            //for (var i = 0; i < 0; i++)
+            //{
+            //        disp.DispatchMessage(
+            //            new UncommitedMessage("command", "Sales", "CreateSalesOrder", Guid.NewGuid(), 0, DateTime.UtcNow, json));
 
-                    //disp.DispatchCommand(
-                    //new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
+            //        //disp.DispatchCommand(
+            //        //new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
 
-                    /*
-                disp.DispatchEvents(
-                    new NFabric.Samples.Sales.Events.SalesOrder.SalesOrderCreated(Guid.NewGuid(), Guid.NewGuid()));
-                    */
-            }
+            //        disp.DispatchEvents(
+            //            new NFabric.Samples.Sales.Events.SalesOrder.SalesOrderCreated(Guid.NewGuid(), Guid.NewGuid()));
+            //}
             // deploy BC
             //bus.EnsureBoundedContext(bc);
 
@@ -90,15 +89,12 @@ namespace NFabric.Host
             //bus.Dispose();
         }
 
-        private static NFabric.Infrastructure.Mongo.MongoEventStreamRepository GetMongo() {
-            return new NFabric.Infrastructure.Mongo.MongoEventStreamRepository();
+        private static Infrastructure.Mongo.MongoEventStreamRepository GetMongo() {
+            return new Infrastructure.Mongo.MongoEventStreamRepository();
         }
 
         private static IServiceBus CreateRabbitBus() {
-            //var assembly = Assembly.LoadFile("NFabric.Infrastructure.RabbitMQ.dll");
-            //var bus = assembly.CreateInstance("NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus", false, BindingFlags.CreateInstance, null, new object[] {"host=localhost"}, null, null) as IServiceBus;
-
-            var bus = new NFabric.Infrastructure.RabbitMQ.RabbitMQServiceBus("host=172.16.0.166");
+            var bus = new Infrastructure.RabbitMQ.RabbitMQServiceBus("host=172.16.0.166");
 
             return bus;
         }

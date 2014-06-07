@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,31 +65,23 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="Domain.Model\" />
-    <Folder Include="Port\" />
-    <Folder Include="Application\CommandHandlers\" />
-    <Folder Include="Application\EventHandlers\" />
-    <Folder Include="Application\CommandHandlers\SalesOrder\" />
-    <Folder Include="Port\Infrastructure\" />
-    <Folder Include="Domain.Model\Customers\" />
-    <Folder Include="Domain.Model\Credits\" />
-    <Folder Include="Domain.Model\Quotes\" />
     <Folder Include="Domain.Model\CreditReasons\" />
     <Folder Include="Domain.Model\CustomerTypes\" />
     <Folder Include="Domain.Model\DeliveryMethods\" />
+    <Folder Include="Domain.Model\Quotes\" />
     <Folder Include="Domain.Model\SalesGroups\" />
     <Folder Include="Domain.Model\SalesPersons\" />
     <Folder Include="Domain.Model\SellPriceTiers\" />
     <Folder Include="Domain.Model\ShippingCompanies\" />
-    <Folder Include="Domain.Model\SalesOrders\" />
-    <Folder Include="Domain.Model\SalesOrders\Exceptions\" />
-    <Folder Include="Domain.Model\SalesOrders\Snapshot\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFabric.BoundedContext\NFabric.BoundedContext.csproj">
       <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
       <Name>NFabric.BoundedContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric.Host\NFabric.Host.csproj">
+      <Project>{ad6ce9ac-5df0-4483-8f70-935c844082c4}</Project>
+      <Name>NFabric.Host</Name>
     </ProjectReference>
     <ProjectReference Include="..\NFabric.Samples.Sales.Commands\NFabric.Samples.Sales.Commands.csproj">
       <Project>{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5}</Project>
