@@ -16,18 +16,16 @@ namespace NFabric.Infrastructure.Mongo
 
         public MongoEventStreamRepository()
         {
-            MongoDB.Driver.MongoClient client = new MongoDB.Driver.MongoClient();
+            MongoDB.Driver.MongoClient client = new MongoDB.Driver.MongoClient("mongodb://localhost");
             Collection = client.GetServer().GetDatabase("nfabric").GetCollection("events");
         }
 
         public IList<Guid> GetSOs() {
-            return Collection.FindAllAs<EventDocument>().SetLimit(100).Select(p=>p.AggId).ToList();
+            return Collection.FindAllAs<EventDocument>().SetLimit(5000).Select(p=>p.AggId).ToList();
         }
 
         public IList<EventRecord> GetStream(Guid aggregateId, int? withSequenceHigherThan = default(int?))
         {
-            //var oooo = Collection.FindAllAs<EventDocument>().ToList();
-
             var query = Query.EQ("AggId", aggregateId);
 
             if (withSequenceHigherThan != null)
@@ -59,19 +57,5 @@ namespace NFabric.Infrastructure.Mongo
 
             Collection.InsertBatch<EventDocument>(documents);
         }
-        /*
-        public void Append(IList<SequencedEvent> events)
-        {
-            var documents = events.Select(
-                p=>new EventDocument(
-                    p.AggregateId,
-                    p.Sequence,
-                    "event",
-                    p.,
-                    p.AdditionalData)).ToList();
-
-            Collection.InsertBatch<EventDocument>(documents);
-        }
-        */
     }
 }
