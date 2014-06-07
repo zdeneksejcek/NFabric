@@ -1,5 +1,4 @@
-﻿using System;
-using NFabric.BoundedContext.Domain;
+﻿using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.Credits
 {

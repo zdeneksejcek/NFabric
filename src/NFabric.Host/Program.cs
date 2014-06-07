@@ -28,12 +28,14 @@ namespace NFabric.Host
             var mongo = GetMongo();
 
             var bc = new AutoBoundedContext(assembly, mongo);
+            ConsolePublisher.WriteBCInfo(bc.GetName(),bc.GetHandledMessages());
 
             var cons = bus.CreateMessageConsumer();
 
             using (var consume = cons.Consume(bc.GetName(), m => Consume(m, bc, mongo)))
    		    {
    		        Console.ReadLine();
+                Environment.Exit(0);
    		    }
 
             //var ids  = mongo.GetSOs();
@@ -94,7 +96,7 @@ namespace NFabric.Host
         }
 
         private static IServiceBus CreateRabbitBus() {
-            var bus = new Infrastructure.RabbitMQ.RabbitMQServiceBus("host=172.16.0.166");
+            var bus = new Infrastructure.RabbitMQ.RabbitMQServiceBus("host=localhost");
 
             return bus;
         }

@@ -1,24 +1,19 @@
-﻿using System;
+﻿using NFabric.Samples.Sales.Domain.Model.DeliveryMethods;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;
-using NFabric.Samples.Sales.Domain.Model;
 using NFabric.BoundedContext;
 using NFabric.Samples.Sales.Commands.SalesOrder;
 
 namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
 {
-    public class SalesOrderCommandHandler :
-                                ICommandHandler<CreateSalesOrder>,
-                                ICommandHandler<AddSalesOrderLine>,
-                                ICommandHandler<ChangeOrderLineQuantity>
+    public class SalesOrderCommandHandler : BaseSalesOrderCommandHandler,
+                                            ICommandHandler<CreateSalesOrder>,
+                                            ICommandHandler<ChangeSalesOrderWarehouse>,
+                                            ICommandHandler<ChangeSalesOrderDeliveryMethod>
     {
-        ISalesOrderRepository _repository;
 
-        public SalesOrderCommandHandler(ISalesOrderRepository repository)
-        {
-            _repository = repository;
-        }
+        public SalesOrderCommandHandler(ISalesOrderRepository repository) : base(repository) { }
 
         public void Handle(CreateSalesOrder command) {
             var order = new Domain.Model.SalesOrders.SalesOrder(
@@ -28,28 +23,22 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
             _repository.Save(order);
         }
 
-        public void Handle(AddSalesOrderLine command) {
-            var order = _repository.GetBy(command.SalesOrder);
-
-            if (order == null)
-                throw new SalesOrderNotFound();
-
-            order.Lines.Add(
-                new ProductId(command.Product),
-                new LineQuantity(command.Quantity));
-
-            _repository.Save(order);
+        public void Handle(ChangeSalesOrderWarehouse command)
+        {
+            using (var order = GetExistingSalesOrder(command.SalesOrder))
+            {
+                order.Object.ChangeWarehouse(
+                    new WarehouseId(command.Warehouse));
+            }
         }
 
-        public void Handle(ChangeOrderLineQuantity command) {
-            var order = _repository.GetBy(command.SalesOrder);
-
-            if (order == null)
-                throw new SalesOrderNotFound();
-
-            order.Lines.ChangeQuantity(command.Line, command.Quantity);
-
-            _repository.Save(order);
+        public void Handle(ChangeSalesOrderDeliveryMethod command)
+        {
+            using (var order = GetExistingSalesOrder(command.SalesOrder))
+            {
+                order.Object.ChangeDeliveryMethod(new DeliveryMethodId(command.DeliveryMethod));
+            }
         }
+
     }
 }

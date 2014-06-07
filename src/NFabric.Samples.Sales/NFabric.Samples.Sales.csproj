@@ -31,6 +31,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\CommandHandlers\SalesOrder\BaseSalesOrderCommandHandler.cs" />
+    <Compile Include="Application\Savable.cs" />
+    <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderLinesCommandHandler.cs" />
+    <Compile Include="Domain.Model\DeliveryMethods\DeliveryMethod.cs" />
+    <Compile Include="Domain.Model\DeliveryMethods\DeliveryMethodId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Port\ProductId.cs" />
     <Compile Include="Port\WarehouseId.cs" />
@@ -38,7 +43,7 @@
     <Compile Include="Port\Infrastructure\SalesOrderRepository.cs" />
     <Compile Include="Port\Infrastructure\CustomerRepository.cs" />
     <Compile Include="Port\Infrastructure\CreditRepository.cs" />
-    <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderNotFound.cs" />
+    <Compile Include="Application\CommandHandlers\SalesOrder\Exceptions\SalesOrderNotFound.cs" />
     <Compile Include="Domain.Model\Customers\CustomerId.cs" />
     <Compile Include="Domain.Model\Customers\Customer.cs" />
     <Compile Include="Domain.Model\Customers\ICustomerRepository.cs" />
@@ -67,7 +72,6 @@
   <ItemGroup>
     <Folder Include="Domain.Model\CreditReasons\" />
     <Folder Include="Domain.Model\CustomerTypes\" />
-    <Folder Include="Domain.Model\DeliveryMethods\" />
     <Folder Include="Domain.Model\Quotes\" />
     <Folder Include="Domain.Model\SalesGroups\" />
     <Folder Include="Domain.Model\SalesPersons\" />

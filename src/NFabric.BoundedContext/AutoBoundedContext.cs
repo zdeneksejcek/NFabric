@@ -66,7 +66,5 @@ namespace NFabric.BoundedContext
         {
             return _handledMessages;
         }
-
-
     }
 }

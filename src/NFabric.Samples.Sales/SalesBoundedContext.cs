@@ -11,8 +11,8 @@ namespace NFabric.Samples.Sales
 
         public IList<MessageDescriptorWithType> GetMessageDescriptors()
         {
-            var eventTypes = typeof(NFabric.Samples.Sales.Events.SalesOrder.SalesOrderCreated).Assembly.GetExportedTypes();
-            var commandTypes = typeof(NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder).Assembly.GetExportedTypes();
+            var eventTypes = typeof(Events.SalesOrder.SalesOrderCreated).Assembly.GetExportedTypes();
+            var commandTypes = typeof(Commands.SalesOrder.CreateSalesOrder).Assembly.GetExportedTypes();
 
             var eventDescriptions = eventTypes.Select(p => Create("event", p));
             var commandDescriptions = commandTypes.Select(p => Create("command", p));

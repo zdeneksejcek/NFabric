@@ -12,5 +12,16 @@ namespace NFabric.Samples.Sales.Commands.SalesOrder
             Customer = customer;
             Warehouse = warehouse;
         }
+
+        /*
+        public static string GetString(CreateSalesOrder command)
+        {
+            
+        }
+
+        public static CreateSalesOrder GetObject(string @string)
+        {
+        }
+        */
     }
 }
