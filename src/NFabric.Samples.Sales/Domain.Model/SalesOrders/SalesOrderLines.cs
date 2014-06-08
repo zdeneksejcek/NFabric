@@ -8,13 +8,12 @@ using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {
+    [Serializable]
     public class SalesOrderLines : EntityCollectionWithES<SalesOrderLine,List<SalesOrderLine>>
     {
         private Guid Order { get { return base.AggregateId; }}
 
-        public SalesOrderLines(AggregateEvents events, Func<Guid> getAggregateIdMethod) : base(events, getAggregateIdMethod) {
-            events.Handles<SalesOrderLineAdded>(this.Apply);
-        }
+        public SalesOrderLines(Func<AggregateWithES> getAggregate) : base(getAggregate) { }
 
         #region line added
 
@@ -27,7 +26,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         {
             base.Collection.Add(
                 new SalesOrderLine(
-                    base.Events,
+                    Events,
                     new ProductId(@event.ProductId),
                     new LineQuantity(@event.Quantity)));
         }
@@ -49,7 +48,8 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         #region change quantity
 
-        public void ChangeQuantity(Guid line, int quantity) {
+        public void ChangeQuantity(Guid line, int quantity)
+        {
             Events.Update(
                 new SalesOrderLineQuantityChanged(line, quantity));
         }
@@ -64,5 +64,10 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         }
 
         #endregion
+
+        protected override void InitializeEventHandlers()
+        {
+            Events.Handles<SalesOrderLineAdded>(Apply);
+        }
     }
 }

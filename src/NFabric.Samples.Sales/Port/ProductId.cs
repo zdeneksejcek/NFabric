@@ -2,6 +2,7 @@
 
 namespace NFabric.Samples.Sales.Port
 {
+    [Serializable]
     public class ProductId
     {
         public Guid Id { get; private set; }

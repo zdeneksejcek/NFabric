@@ -2,6 +2,7 @@
 
 namespace NFabric.Samples.Sales.Domain.Model.DeliveryMethods
 {
+    [Serializable]
     public class DeliveryMethodId
     {
         public Guid Id { get; private set; }

@@ -9,6 +9,11 @@ namespace NFabric.Samples.Sales.Domain.Model.Credits
         public Credit()
         {
         }
+
+        protected override void InitializeEventHandlers()
+        {
+
+        }
     }
 }
 

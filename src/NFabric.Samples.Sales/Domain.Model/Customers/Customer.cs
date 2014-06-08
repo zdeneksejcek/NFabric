@@ -1,5 +1,4 @@
-﻿using System;
-using NFabric.BoundedContext.Domain;
+﻿using NFabric.BoundedContext.Domain;
 
 namespace NFabric.Samples.Sales.Domain.Model.Customers
 {
@@ -7,6 +6,11 @@ namespace NFabric.Samples.Sales.Domain.Model.Customers
     {
         public Customer()
         {
+        }
+
+        protected override void InitializeEventHandlers()
+        {
+            
         }
     }
 }

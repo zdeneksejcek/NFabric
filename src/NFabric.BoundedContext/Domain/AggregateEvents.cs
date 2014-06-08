@@ -4,10 +4,19 @@ using System.Linq;
 
 namespace NFabric.BoundedContext.Domain
 {
+    [Serializable]
     public class AggregateEvents : IProducesEvents
     {
         private List<Handler> _handlers = new List<Handler>();
-        private List<object> _uncommitedEvents = new List<object>();
+
+        [NonSerialized]
+        private List<object> _uncommitedEvents;
+
+        private List<object> UncommitedEvents
+        {
+            get { return _uncommitedEvents ?? (_uncommitedEvents = new List<object>()); }
+        } 
+        
         public int LastCommitedSequence { get; private set; }
         public Func<Guid> GetAggregateIdMethod = null;
 
@@ -32,12 +41,12 @@ namespace NFabric.BoundedContext.Domain
         {
             Guid aggregateId = GetAggregateIdMethod();
             var list = new List<SequencedEvent>();
-            for (int i = 0; i < _uncommitedEvents.Count; i++)
+            for (int i = 0; i < UncommitedEvents.Count; i++)
                 list.Add(
                     new SequencedEvent(
                         aggregateId,
                         LastCommitedSequence + i +1,
-                        _uncommitedEvents.ElementAt(i), DateTime.UtcNow));
+                        UncommitedEvents.ElementAt(i), DateTime.UtcNow));
 
             return list;
         }
@@ -45,7 +54,7 @@ namespace NFabric.BoundedContext.Domain
         public void Update(object @event) {
             ApplyUncommited(@event);
 
-            _uncommitedEvents.Add(@event);
+            UncommitedEvents.Add(@event);
         }
 
         public void UpdateCommited(IEnumerable<SequencedEvent> events) {
@@ -54,13 +63,13 @@ namespace NFabric.BoundedContext.Domain
         }
 
         private void ApplyUncommited(object @event) {
-            var handler = _handlers.Where(p => p.Type == @event.GetType()).FirstOrDefault();
+            var handler = _handlers.FirstOrDefault(p => p.Type == @event.GetType());
             if (handler != null)
                 handler.Handle(@event);
         }
 
         private void Apply(SequencedEvent @event) {
-            var handler = _handlers.Where(p => p.Type == @event.Event.GetType()).FirstOrDefault();
+            var handler = _handlers.FirstOrDefault(p => p.Type == @event.Event.GetType());
             if (handler != null)
             {
                 handler.Handle(@event.Event);

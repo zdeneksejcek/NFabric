@@ -2,6 +2,7 @@
 
 namespace NFabric.BoundedContext.Domain
 {
+    [Serializable]
     public class EntityWithES
     {
         protected AggregateEvents Events { get; set; }

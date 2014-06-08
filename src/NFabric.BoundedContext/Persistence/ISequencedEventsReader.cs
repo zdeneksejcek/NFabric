@@ -9,4 +9,3 @@ namespace NFabric.BoundedContext.Persistence
         IList<SequencedEvent> GetEvents(Guid aggregateId, int? withSequenceHigherThan = null);
     }
 }
-

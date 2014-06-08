@@ -2,6 +2,7 @@
 
 namespace NFabric.Samples.Sales.Commands.SalesOrder
 {
+    [Serializable]
     public class CreateSalesOrder
     {
         public Guid Customer { get; private set; }

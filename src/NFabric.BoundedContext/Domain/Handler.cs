@@ -2,6 +2,7 @@
 
 namespace NFabric.BoundedContext.Domain
 {
+    [Serializable]
     internal class Handler
     {
         public Type Type { get; private set; }

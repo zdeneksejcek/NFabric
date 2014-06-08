@@ -2,6 +2,7 @@
 
 namespace NFabric.BoundedContext.Domain
 {
+    [Serializable]
     public class SequencedEvent
     {
         public Guid AggregateId { get; private set; }

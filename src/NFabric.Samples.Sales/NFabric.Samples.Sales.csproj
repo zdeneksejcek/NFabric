@@ -62,7 +62,6 @@
     <Compile Include="Domain.Model\SalesOrders\InvoiceLine.cs" />
     <Compile Include="Domain.Model\SalesOrders\Shipments.cs" />
     <Compile Include="Domain.Model\LineQuantity.cs" />
-    <Compile Include="Domain.Model\SalesOrders\SalesOrderVisitor.cs" />
     <Compile Include="Domain.Model\SalesOrders\ISalesOrderSnapshotVisitor.cs" />
     <Compile Include="Domain.Model\SalesOrders\Snapshot\SalesOrderSnapshot.cs" />
     <Compile Include="Application\EventHandlers\SalesOrderEventHandler.cs" />

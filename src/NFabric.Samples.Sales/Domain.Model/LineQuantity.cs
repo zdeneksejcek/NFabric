@@ -2,6 +2,7 @@
 
 namespace NFabric.Samples.Sales.Domain.Model
 {
+    [Serializable]
     public class LineQuantity
     {
         public int Quantity { get; private set;}
