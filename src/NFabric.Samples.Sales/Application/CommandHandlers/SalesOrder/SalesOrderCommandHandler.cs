@@ -10,7 +10,8 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
     public class SalesOrderCommandHandler : BaseSalesOrderCommandHandler,
                                             ICommandHandler<CreateSalesOrder>,
                                             ICommandHandler<ChangeSalesOrderWarehouse>,
-                                            ICommandHandler<ChangeSalesOrderDeliveryMethod>
+                                            ICommandHandler<ChangeSalesOrderDeliveryMethod>,
+                                            ICommandHandler<ChangeSalesOrderDeliveryAddress>
     {
 
         public SalesOrderCommandHandler(ISalesOrderRepository repository) : base(repository) { }
@@ -40,5 +41,21 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
             }
         }
 
+        public void Handle(ChangeSalesOrderDeliveryAddress command)
+        {
+            using (var order = GetExistingSalesOrder(command.SalesOrder))
+            {
+                order.Object.ChangeDeliveryAddress(
+                    new SalesOrderDeliveryAddress(
+                        command.AddressName,
+                        command.Street,
+                        command.Suburb,
+                        command.City,
+                        command.StateRegion,
+                        command.PostCode,
+                        command.Country
+                        ));
+            }
+        }
     }
 }

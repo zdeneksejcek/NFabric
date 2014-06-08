@@ -36,6 +36,7 @@
     <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderLinesCommandHandler.cs" />
     <Compile Include="Domain.Model\DeliveryMethods\DeliveryMethod.cs" />
     <Compile Include="Domain.Model\DeliveryMethods\DeliveryMethodId.cs" />
+    <Compile Include="Domain.Model\SalesOrders\SalesOrderDeliveryAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Port\ProductId.cs" />
     <Compile Include="Port\WarehouseId.cs" />

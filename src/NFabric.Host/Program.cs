@@ -36,12 +36,13 @@ namespace NFabric.Host
             using (var consume = cons.Consume(bc.GetName(), m => Consume(m, bc, mongo)))
    		    {
    		        Console.ReadLine();
+
                 Environment.Exit(0);
    		    }
         }
 
-        private static Infrastructure.Mongo.MongoEventStreamRepository GetMongo() {
-            return new Infrastructure.Mongo.MongoEventStreamRepository();
+        private static MongoEventStreamRepository GetMongo() {
+            return new MongoEventStreamRepository();
         }
 
         private static IServiceBus CreateRabbitBus() {

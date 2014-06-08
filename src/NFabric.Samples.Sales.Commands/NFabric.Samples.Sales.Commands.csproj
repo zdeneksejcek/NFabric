@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesOrder\ChangeSalesOrderDeliveryAddress.cs" />
     <Compile Include="SalesOrder\ChangeSalesOrderDeliveryMethod.cs" />
     <Compile Include="SalesOrder\ChangeSalesOrderWarehouse.cs" />
     <Compile Include="SalesOrder\CreateSalesOrder.cs" />

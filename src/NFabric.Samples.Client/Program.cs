@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using NFabric.Common;
 using NFabric.Common.Messaging;
 

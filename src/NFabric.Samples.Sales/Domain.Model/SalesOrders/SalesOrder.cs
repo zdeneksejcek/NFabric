@@ -17,27 +17,22 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         private DeliveryMethodId DeliveryMethod { get; set; }
 
+        private SalesOrderDeliveryAddress Address { get; set; }
+
         public SalesOrderLines Lines { get; private set; }
 
-        //public Invoices Invoices { get; private set; }
+        public Invoices Invoices { get; private set; }
 
-        //public Shipments Shipments { get; private set; }
+        public Shipments Shipments { get; private set; }
 
         #region constructors
         public SalesOrder(CustomerId customer, WarehouseId warehouse)
 		{
-            Id = Guid.NewGuid();
             Init();
+
             Events.Update(
-                new SalesOrderCreated(Id, customer.Id, warehouse.Id));
+                new SalesOrderCreated(Guid.NewGuid(), customer.Id, warehouse.Id));
 		}
-
-        public SalesOrder(Guid id, IEnumerable<SequencedEvent> events) {
-            Id = id;
-            Init();
-
-            Events.UpdateCommited(events);
-        }
 
         public SalesOrder(IEnumerable<SequencedEvent> events) {
             Init();
@@ -49,9 +44,10 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         {
             InitializeEventHandlers();
 
+            Address = new SalesOrderDeliveryAddress();
             Lines = new SalesOrderLines(() => this);
-            //Invoices = new Invoices(() => this);
-            //Shipments = new Shipments(() => this);
+            Invoices = new Invoices(() => this);
+            Shipments = new Shipments(() => this);
         }
         #endregion
 
@@ -65,6 +61,20 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         public void ChangeDeliveryMethod(DeliveryMethodId method)
         {
             Events.Update(new SalesOrderDeliveryMethodChanged(method.Id));
+        }
+
+        public void ChangeDeliveryAddress(SalesOrderDeliveryAddress newAddress)
+        {
+            Events.Update(
+                new SalesOrderDeliveryAddressChanged(
+                        newAddress.AddressName,
+                        newAddress.Street,
+                        newAddress.Suburb,
+                        newAddress.City,
+                        newAddress.StateRegion,
+                        newAddress.PostCode,
+                        newAddress.Country
+                    ));
         }
 
         #endregion
@@ -83,6 +93,9 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
             Events.Handles<SalesOrderDeliveryMethodChanged>(
                 e => DeliveryMethod = new DeliveryMethodId(e.DeliveryMethod));
+
+            Events.Handles<SalesOrderDeliveryAddressChanged>(
+                e => Address = new SalesOrderDeliveryAddress(e.AddressName, e.Street, e.Suburb, e.City, e.StateRegion, e.PostCode, e.Country));
         }
     }
 }
