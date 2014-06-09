@@ -1,6 +1,7 @@
 ﻿using System;
 using NFabric.Common;
 using NFabric.Common.Messaging;
+using NFabric.Samples.Sales.Commands;
 
 namespace NFabric.Samples.Client
 {
@@ -19,7 +20,12 @@ namespace NFabric.Samples.Client
             //var container = new Container("NFabric.Samples.Sales", "NFabric.BoundedContext", mongo);
 
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(
-                new NFabric.Samples.Sales.Commands.SalesOrder.CreateSalesOrder(Guid.NewGuid(), Guid.NewGuid()));
+                new Sales.Commands.SalesOrder.CreateSalesOrder(
+                    Guid.NewGuid(),
+                    Guid.NewGuid(),
+                    new DateTimeUtc(DateTime.UtcNow),
+                    new DateTimeUtc(DateTime.UtcNow),
+                    new DateTimeUtc(DateTime.UtcNow)));
 
             //while (false)
             //{

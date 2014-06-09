@@ -33,6 +33,5 @@ namespace NFabric.Samples.Sales.Commands.SalesOrder
             PostCode = postCode;
             Country = country;
         }
-
     }
 }

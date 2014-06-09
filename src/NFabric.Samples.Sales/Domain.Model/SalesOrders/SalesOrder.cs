@@ -19,19 +19,33 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         private SalesOrderDeliveryAddress Address { get; set; }
 
+        private DateTimeUtc OrderDate { get; set; }
+
+        private DateTimeUtc QuotaExpiryDate { get; set; }
+
+        private DateTimeUtc RequiredDate { get; set; }
+
+        private string Comments { get; set; }
+
         public SalesOrderLines Lines { get; private set; }
 
-        public Invoices Invoices { get; private set; }
+        private Invoices Invoices { get; set; }
 
-        public Shipments Shipments { get; private set; }
+        private Shipments Shipments { get; set; }
 
         #region constructors
-        public SalesOrder(CustomerId customer, WarehouseId warehouse)
+        public SalesOrder(CustomerId customer, WarehouseId warehouse, DateTimeUtc orderDate, DateTimeUtc quoteExpiryDate, DateTimeUtc requiredDate)
 		{
             Init();
 
             Events.Update(
-                new SalesOrderCreated(Guid.NewGuid(), customer.Id, warehouse.Id));
+                new SalesOrderCreated(
+                    Guid.NewGuid(),
+                    customer.Id,
+                    warehouse.Id,
+                    orderDate.Value,
+                    quoteExpiryDate.Value,
+                    requiredDate.Value));
 		}
 
         public SalesOrder(IEnumerable<SequencedEvent> events) {
@@ -51,11 +65,16 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         }
         #endregion
 
-        #region event handlers
+        #region public commands
 
         public void ChangeWarehouse(WarehouseId warehouse)
         {
             Events.Update(new SalesOrderWarehouseChanged(warehouse.Id));
+        }
+
+        public void ChangeComments(string comments)
+        {
+            Events.Update(new SalesOrderCommentsChanged(comments));
         }
 
         public void ChangeDeliveryMethod(DeliveryMethodId method)
@@ -77,6 +96,24 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
                     ));
         }
 
+        public void ChangeOrderDate(DateTimeUtc utc)
+        {
+            Events.Update(
+                new SalesOrderDateChanged(utc.Value));
+        }
+
+        public void ChangeQuotaExpiryDate(DateTimeUtc utc)
+        {
+            Events.Update(
+                new SalesOrderQuoteExpiryDateChanged(utc.Value));
+        }
+
+        public void ChangeRequiredDate(DateTimeUtc utc)
+        {
+            Events.Update(
+                new SalesOrderRequiredDateChanged(utc.Value));
+        }
+
         #endregion
 
         protected override void InitializeEventHandlers()
@@ -96,6 +133,18 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
             Events.Handles<SalesOrderDeliveryAddressChanged>(
                 e => Address = new SalesOrderDeliveryAddress(e.AddressName, e.Street, e.Suburb, e.City, e.StateRegion, e.PostCode, e.Country));
+
+            Events.Handles<SalesOrderDateChanged>(
+                e => OrderDate = new DateTimeUtc(e.RequiredDate));
+
+            Events.Handles<SalesOrderQuoteExpiryDateChanged>(
+                e => QuotaExpiryDate = new DateTimeUtc(e.QuotaExpiryDate));
+
+            Events.Handles<SalesOrderRequiredDateChanged>(
+                e => RequiredDate = new DateTimeUtc(e.RequiredDate));
+
+            Events.Handles<SalesOrderCommentsChanged>(
+                e => Comments = e.Comments);
         }
     }
 }

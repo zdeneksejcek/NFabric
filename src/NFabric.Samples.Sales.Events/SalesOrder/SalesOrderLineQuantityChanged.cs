@@ -5,12 +5,12 @@ namespace NFabric.Samples.Sales.Events.SalesOrder
     [Serializable]
     public class SalesOrderLineQuantityChanged
     {
-        public Guid LineId { get; private set; }
+        public Guid Line { get; private set; }
         public int Quantity { get; private set; }
 
-        public SalesOrderLineQuantityChanged(Guid lineId, int quantity)
+        public SalesOrderLineQuantityChanged(Guid line, int quantity)
         {
-            LineId = lineId;
+            Line = line;
             Quantity = quantity;
         }
     }

@@ -32,12 +32,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesOrder\SalesOrderCommentsChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderCreated.cs" />
+    <Compile Include="SalesOrder\SalesOrderDateChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderDeliveryAddressChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderDeliveryMethodChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderLineAdded.cs" />
+    <Compile Include="SalesOrder\SalesOrderLinePricesChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderLineQuantityChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderLineRemoved.cs" />
+    <Compile Include="SalesOrder\SalesOrderLinesReordered.cs" />
+    <Compile Include="SalesOrder\SalesOrderQuoteExpiryDateChanged.cs" />
+    <Compile Include="SalesOrder\SalesOrderRequiredDateChanged.cs" />
     <Compile Include="SalesOrder\SalesOrderWarehouseChanged.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

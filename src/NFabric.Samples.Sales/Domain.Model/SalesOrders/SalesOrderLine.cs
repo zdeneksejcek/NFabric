@@ -10,14 +10,23 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         public ProductId Product { get; private set; }
         public LineQuantity Quantity { get; private set; }
 
-        public SalesOrderLine(AggregateEvents events, ProductId product, LineQuantity quantity) : base(events)
+        private string Comments { get; set; }
+
+        public SalesOrderLine(AggregateEvents events, ProductId product, LineQuantity quantity, string comments) : base(events)
         {
             Product = product;
             Quantity = quantity;
+            Comments = comments;
         }
 
         public void ChangeQuantity(int quantity) {
             this.Quantity = new LineQuantity(quantity);
         }
+
+        public void ChangePrices()
+        {
+            
+        }
+
     }
 }

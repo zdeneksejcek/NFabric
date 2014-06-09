@@ -14,4 +14,3 @@ namespace NFabric.Samples.Sales.Domain.Model.Customers
         }
     }
 }
-

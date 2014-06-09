@@ -1,4 +1,5 @@
-﻿using NFabric.Samples.Sales.Domain.Model.DeliveryMethods;
+﻿using NFabric.Samples.Sales.Domain.Model;
+using NFabric.Samples.Sales.Domain.Model.DeliveryMethods;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;
@@ -19,7 +20,10 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
         public void Handle(CreateSalesOrder command) {
             var order = new Domain.Model.SalesOrders.SalesOrder(
                             new CustomerId(command.Customer),
-                            new WarehouseId(command.Warehouse));
+                            new WarehouseId(command.Warehouse),
+                            new DateTimeUtc(command.OrderDate.Value),
+                            new DateTimeUtc(command.QuotaExpiryDate.Value),
+                            new DateTimeUtc(command.RequiredDate.Value));
 
             _repository.Save(order);
         }
@@ -28,7 +32,7 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
         {
             using (var order = GetExistingSalesOrder(command.SalesOrder))
             {
-                order.Object.ChangeWarehouse(
+                order.SavableObject.ChangeWarehouse(
                     new WarehouseId(command.Warehouse));
             }
         }
@@ -37,7 +41,16 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
         {
             using (var order = GetExistingSalesOrder(command.SalesOrder))
             {
-                order.Object.ChangeDeliveryMethod(new DeliveryMethodId(command.DeliveryMethod));
+                order.SavableObject.ChangeDeliveryMethod(
+                    new DeliveryMethodId(command.DeliveryMethod));
+            }
+        }
+
+        public void Handle(ChangeSalesOrderComments command)
+        {
+            using (var order = GetExistingSalesOrder(command.SalesOrder))
+            {
+                order.SavableObject.ChangeComments(command.Comments);
             }
         }
 
@@ -45,7 +58,7 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
         {
             using (var order = GetExistingSalesOrder(command.SalesOrder))
             {
-                order.Object.ChangeDeliveryAddress(
+                order.SavableObject.ChangeDeliveryAddress(
                     new SalesOrderDeliveryAddress(
                         command.AddressName,
                         command.Street,

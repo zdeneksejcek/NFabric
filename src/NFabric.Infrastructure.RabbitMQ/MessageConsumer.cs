@@ -18,8 +18,8 @@ namespace NFabric.Infrastructure.RabbitMQ
 
             return _bus.Consume<string>(
                 queue,
-                (EasyNetQ.IMessage<string> message, EasyNetQ.MessageReceivedInfo info) => Receive(message, info, onMessage),
-                (configure) => { configure.WithPriority(0); });
+                (message, info) => Receive(message, info, onMessage),
+                (configure) => configure.WithPriority(0));
         }
 
         private void Receive(EasyNetQ.IMessage<string> rabbitMessage, EasyNetQ.MessageReceivedInfo info, Action<Message> onMessage) {

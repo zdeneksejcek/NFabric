@@ -5,7 +5,7 @@ using NFabric.BoundedContext.Domain;
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {
     [Serializable]
-    public class Shipments : EntityCollectionWithES<SalesOrderLine,List<SalesOrderLine>>
+    public class Shipments : EntityCollectionWithES<SalesOrderLine>
     {
         private Guid Order { get; set; }
 

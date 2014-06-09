@@ -5,10 +5,8 @@ using System.Runtime.Serialization;
 namespace NFabric.BoundedContext.Domain
 {
     [Serializable]
-    public abstract class EntityCollectionWithES<TEntity, TCollection> where TCollection : ICollection<TEntity>, new()
+    public abstract class EntityCollectionWithES<TEntity> : List<TEntity>
     {
-        protected TCollection Collection = new TCollection();
-        
         protected Guid AggregateId {
             get { return _getParentAggregate().Id; }
         }
