@@ -34,7 +34,6 @@
     <Compile Include="Application\CommandHandlers\SalesOrder\BaseSalesOrderCommandHandler.cs" />
     <Compile Include="Application\Savable.cs" />
     <Compile Include="Application\CommandHandlers\SalesOrder\SalesOrderLinesCommandHandler.cs" />
-    <Compile Include="Domain.Model\DateTimeUtc.cs" />
     <Compile Include="Domain.Model\DeliveryMethods\DeliveryMethod.cs" />
     <Compile Include="Domain.Model\DeliveryMethods\DeliveryMethodId.cs" />
     <Compile Include="Domain.Model\SalesOrders\LinePrices.cs" />

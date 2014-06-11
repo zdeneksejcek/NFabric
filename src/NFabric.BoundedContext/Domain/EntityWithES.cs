@@ -10,8 +10,12 @@ namespace NFabric.BoundedContext.Domain
 
         public Guid Id { get; protected set; }
 
-        protected EntityWithES(AggregateEvents events) {
+        protected EntityWithES(AggregateEvents events, Guid id)
+        {
+            Id = id;
             Events = events;
+
+            InitializeEventHandlers();
         }
 
         protected abstract void InitializeEventHandlers();

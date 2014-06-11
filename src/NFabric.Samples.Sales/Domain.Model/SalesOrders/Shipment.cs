@@ -6,8 +6,9 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
     [Serializable]
     public class Shipment : EntityWithES
     {
-        public Shipment(AggregateEvents events) : base(events)
+        public Shipment(AggregateEvents events, Guid id) : base(events, id)
         {
+            
         }
 
         protected override void InitializeEventHandlers()

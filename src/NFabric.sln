@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Client", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Contracts", "NFabric.Contracts\NFabric.Contracts.csproj", "{C91B4D71-3AEC-45EC-883F-F8A0EFA59544}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFabric.Samples.Tests", "NFabric.Samples.Tests\NFabric.Samples.Tests.csproj", "{ED06F348-EEA0-42D8-BF5B-41A60EB7301A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{C91B4D71-3AEC-45EC-883F-F8A0EFA59544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C91B4D71-3AEC-45EC-883F-F8A0EFA59544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C91B4D71-3AEC-45EC-883F-F8A0EFA59544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED06F348-EEA0-42D8-BF5B-41A60EB7301A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED06F348-EEA0-42D8-BF5B-41A60EB7301A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED06F348-EEA0-42D8-BF5B-41A60EB7301A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED06F348-EEA0-42D8-BF5B-41A60EB7301A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{1D934DE6-3779-4D9B-B1F7-F1F4BD5C8AB5} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 		{6EE3D914-534C-451C-90A8-1A13943C3ADA} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 		{A7580B7A-E252-41F3-AFAA-A7E780C56688} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
+		{ED06F348-EEA0-42D8-BF5B-41A60EB7301A} = {70658C3D-F5E2-45F9-BF1D-D41F8A90E254}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = NFabric.Host\NFabric.Host.csproj

@@ -24,12 +24,13 @@ namespace NFabric.Host
             var assembly = Assembly.LoadFile(makeAboslute);
 
             var bus = CreateRabbitBus();
-            var disp = new MessageDispatcher(bus);
+            //var disp = new MessageDispatcher(bus);
 
             var mongo = GetMongo();
 
             var bc = new AutoBoundedContext(assembly, mongo);
-            ConsolePublisher.WriteBCInfo(bc.GetName(),bc.GetHandledMessages());
+
+            ConsolePublisher.WriteBCInfo(bc.GetName(), bc.GetHandledMessages());
 
             var cons = bus.CreateMessageConsumer();
 

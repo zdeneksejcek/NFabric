@@ -103,7 +103,7 @@ namespace NFabric.BoundedContext.Domain
                 handler = _handlers.FirstOrDefault(p => p.Type == @event.GetType());
 
             if (handler == null)
-                throw new UnhandledEvent();
+                throw new UnhandledEvent(@event);
 
             return handler;
         }

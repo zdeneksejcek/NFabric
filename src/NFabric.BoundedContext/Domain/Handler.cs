@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace NFabric.BoundedContext.Domain
 {
     [Serializable]
+    [DebuggerDisplay("{Type.Name}")]
     internal class Handler
     {
         public Type Type { get; private set; }

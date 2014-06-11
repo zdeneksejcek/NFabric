@@ -1,6 +1,7 @@
 ﻿using System;
 using NFabric.Common;
 using NFabric.Common.Messaging;
+using NFabric.Contracts;
 using NFabric.Samples.Sales.Commands;
 
 namespace NFabric.Samples.Client

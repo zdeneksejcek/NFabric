@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NFabric.Contracts;
 using NFabric.Samples.Sales.Domain.Model.DeliveryMethods;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;

@@ -20,6 +20,7 @@ namespace NFabric.BoundedContext.Domain
         protected EntityCollectionWithES(Func<AggregateWithES> getParentAggregate)
         {
             _getParentAggregate = getParentAggregate;
+            InitializeEventHandlers();
         }
 
         protected abstract void InitializeEventHandlers();

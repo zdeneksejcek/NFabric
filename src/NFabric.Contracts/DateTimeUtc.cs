@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NFabric.Samples.Sales.Commands
+namespace NFabric.Contracts
 {
     public class DateTimeUtc
     {

@@ -8,25 +8,28 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
     [Serializable]
     public class SalesOrderLine : EntityWithES
     {
-        public ProductId Product { get; private set; }
+        private ProductId Product { get; set; }
 
-        public LineQuantity Quantity { get; private set; }
+        private LineQuantity Quantity { get; set; }
+
+        private LinePrices Prices { get; set; }
 
         private string Comments { get; set; }
 
-        public SalesOrderLine(AggregateEvents events, ProductId product, LineQuantity quantity, string comments) : base(events)
+        public SalesOrderLine(AggregateEvents events, Guid lineId, ProductId product, LineQuantity quantity, string comments) : base(events, lineId)
         {
+            Id = lineId;
             Product = product;
             Quantity = quantity;
             Comments = comments;
         }
 
         #region line price changed
-        public void ChangePrice(Guid line, LinePrices prices)
+        public void ChangePrices(LinePrices prices)
         {
             Events.Update(
                 new SalesOrderLinePricesChanged(
-                    line,
+                    this.Id,
                     prices.UnitPrice.Amount,
                     prices.Discount,
                     prices.DiscountedPrice.Amount));
@@ -34,15 +37,20 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         private void Apply(SalesOrderLinePricesChanged @event)
         {
-            throw new NotImplementedException();
-            //GetExistingLine(@event.Line).ChangePrices(@event.UnitPrice, @event.Discount, @event.DiscountedPrice);
+            //@event.UnitPrice.
+            //this.Prices = new LinePrices(@event.UnitPrice, @);
+        }
+
+        private void Apply(SalesOrderLineQuantityChanged @event)
+        {
+            this.Quantity = new LineQuantity(@event.Quantity);
         }
 
         #endregion
 
         protected override void InitializeEventHandlers()
         {
-            throw new NotImplementedException();
+            Events.Handles<SalesOrderLineQuantityChanged>(this.Id, Apply);
         }
     }
 }

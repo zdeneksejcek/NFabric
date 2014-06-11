@@ -6,7 +6,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
     [Serializable]
     public class InvoiceLine : EntityWithES
     {
-        public InvoiceLine(AggregateEvents events) : base(events)
+        public InvoiceLine(AggregateEvents events, Guid id) : base(events, id)
         {
         }
 

@@ -22,7 +22,7 @@ namespace NFabric.BoundedContext.Proxy
 
         private void InitializeAppDomain(Assembly assembly) {
             var interf = typeof(IBoundedContext);
-            var bcObjType = assembly.GetTypes().FirstOrDefault(p => interf.IsAssignableFrom(p));
+            var bcObjType = assembly.GetTypes().FirstOrDefault(interf.IsAssignableFrom);
             if (bcObjType != null)
             {
                     Context = Activator.CreateInstance(bcObjType) as IBoundedContext;

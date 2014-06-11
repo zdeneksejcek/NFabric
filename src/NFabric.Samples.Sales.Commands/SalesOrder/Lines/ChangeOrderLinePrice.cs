@@ -1,4 +1,5 @@
 ﻿using System;
+using NFabric.Contracts;
 
 namespace NFabric.Samples.Sales.Commands.SalesOrder.Lines
 {

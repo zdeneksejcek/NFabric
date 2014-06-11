@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace NFabric.Samples.Sales.Domain.Model
 {
     [Serializable]
+    [DebuggerDisplay("{Quantity}")]
     public class LineQuantity
     {
         public int Quantity { get; private set;}

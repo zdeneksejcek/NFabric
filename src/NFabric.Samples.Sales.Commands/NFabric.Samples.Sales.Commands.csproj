@@ -31,8 +31,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTimeUtc.cs" />
-    <Compile Include="MonetaryValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesOrder\AssignSalesGroup.cs" />
     <Compile Include="SalesOrder\AssignSalesPerson.cs" />

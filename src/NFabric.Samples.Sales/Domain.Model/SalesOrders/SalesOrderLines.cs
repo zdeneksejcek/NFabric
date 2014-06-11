@@ -1,8 +1,8 @@
 ﻿using System;
-using NFabric.Samples.Sales.Port;
-using System.Collections.Generic;
 using System.Linq;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders.Exceptions;
+using NFabric.Samples.Sales.Port;
+using System.Collections.Generic;
 using NFabric.Samples.Sales.Events.SalesOrder;
 using NFabric.BoundedContext.Domain;
 
@@ -27,12 +27,23 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
             Add(
                 new SalesOrderLine(
                     Events,
+                    @event.LineId,
                     new ProductId(@event.ProductId),
                     new LineQuantity(@event.Quantity),
                     @event.Comments));
         }
 
         #endregion
+
+        public SalesOrderLine GetExistingLine(Guid lineId)
+        {
+            var line = this.FirstOrDefault(p => p.Id == lineId);
+
+            if (line == null)
+                throw new SalesOrderLineNotFound();
+
+            return line;
+        }
 
         #region line removed
 
@@ -55,11 +66,6 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
                 new SalesOrderLineQuantityChanged(line, quantity.Quantity));
         }
 
-        public void Apply(SalesOrderLineQuantityChanged @event)
-        {
-            //GetExistingLine(@event.Line).ChangeQuantity(@event.Quantity);
-        }
-
         #endregion
 
         #region reorder
@@ -77,34 +83,11 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         #endregion
 
-        private SalesOrderLine GetExistingLine(Guid guid)
-        {
-            var line = this.FirstOrDefault(p => p.Id == guid);
-
-            if (line == null)
-                throw new SalesOrderLineNotFound();
-
-            return line;
-        }
-
         protected override void InitializeEventHandlers()
         {
             Events.Handles<SalesOrderLineAdded>(Apply);
             Events.Handles<SalesOrderLineRemoved>(Apply);
             Events.Handles<SalesOrderLinesReordered>(Apply);
-
-            // line level events
-            //Events.Handles<SalesOrderLineQuantityChanged>(@event => );
         }
-
-        private void UpdateLine(Guid lineId, object @event)
-        {
-            var line = this.FirstOrDefault(p => p.Id == lineId);
-
-            //if (line != null)
-                
-
-        }
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 
-namespace NFabric.Samples.Sales.Commands
+namespace NFabric.Contracts
 {
     public class MonetaryValue
     {

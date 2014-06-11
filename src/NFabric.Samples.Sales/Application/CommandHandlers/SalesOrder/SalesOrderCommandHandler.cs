@@ -1,5 +1,4 @@
-﻿using NFabric.Samples.Sales.Domain.Model;
-using NFabric.Samples.Sales.Domain.Model.DeliveryMethods;
+﻿using NFabric.Samples.Sales.Domain.Model.DeliveryMethods;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using NFabric.Samples.Sales.Port;
 using NFabric.Samples.Sales.Domain.Model.Customers;
@@ -21,9 +20,9 @@ namespace NFabric.Samples.Sales.Application.CommandHandlers.SalesOrder
             var order = new Domain.Model.SalesOrders.SalesOrder(
                             new CustomerId(command.Customer),
                             new WarehouseId(command.Warehouse),
-                            new DateTimeUtc(command.OrderDate.Value),
-                            new DateTimeUtc(command.QuotaExpiryDate.Value),
-                            new DateTimeUtc(command.RequiredDate.Value));
+                            command.OrderDate,
+                            command.QuotaExpiryDate,
+                            command.RequiredDate);
 
             _repository.Save(order);
         }
