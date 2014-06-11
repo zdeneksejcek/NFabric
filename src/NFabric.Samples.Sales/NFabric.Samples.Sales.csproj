@@ -86,6 +86,10 @@
       <Project>{1463FB4A-1CBC-4084-8FFB-8894D3460101}</Project>
       <Name>NFabric.BoundedContext</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFabric.Contracts\NFabric.Contracts.csproj">
+      <Project>{c91b4d71-3aec-45ec-883f-f8a0efa59544}</Project>
+      <Name>NFabric.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NFabric.Host\NFabric.Host.csproj">
       <Project>{ad6ce9ac-5df0-4483-8f70-935c844082c4}</Project>
       <Name>NFabric.Host</Name>

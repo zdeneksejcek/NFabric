@@ -38,6 +38,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\UnhandledEvent.cs" />
     <Compile Include="MessageName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IBoundedContext.cs" />
@@ -81,6 +82,10 @@
     <ProjectReference Include="..\NFabric.Common\NFabric.Common.csproj">
       <Project>{6BDEF486-C0C7-43DD-A092-D6E8541F1711}</Project>
       <Name>NFabric.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFabric.Contracts\NFabric.Contracts.csproj">
+      <Project>{C91B4D71-3AEC-45EC-883F-F8A0EFA59544}</Project>
+      <Name>NFabric.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

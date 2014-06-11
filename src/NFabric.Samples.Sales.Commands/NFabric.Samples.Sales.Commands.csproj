@@ -51,5 +51,10 @@
     <Compile Include="SalesOrder\Lines\ReorderSalesOrderLines.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NFabric.Contracts\NFabric.Contracts.csproj">
+      <Project>{c91b4d71-3aec-45ec-883f-f8a0efa59544}</Project>
+      <Name>NFabric.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

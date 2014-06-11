@@ -1,9 +1,10 @@
 ﻿using System;
+using NFabric.Contracts;
 
 namespace NFabric.Samples.Sales.Events.SalesOrder
 {
     [Serializable]
-    public class SalesOrderDeliveryAddressChanged
+    public class SalesOrderDeliveryAddressChanged : IAggregateEvent
     {
         public string AddressName { get; private set; }
 

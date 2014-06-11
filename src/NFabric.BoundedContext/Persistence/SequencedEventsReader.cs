@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NFabric.BoundedContext.Domain;
 using System.Linq;
+using NFabric.Contracts;
 
 namespace NFabric.BoundedContext.Persistence
 {
@@ -24,7 +25,7 @@ namespace NFabric.BoundedContext.Persistence
                 p=>new SequencedEvent(
                     p.AggregateId,
                     p.Sequence,
-                    DeserializeEvent(p.SerializedEvent, p.TypeName, p.BoundedContext),
+                    DeserializeEvent(p.SerializedEvent, p.TypeName, p.BoundedContext) as IEvent, 
                     p.CreatedOn)
             ).ToList();
         }

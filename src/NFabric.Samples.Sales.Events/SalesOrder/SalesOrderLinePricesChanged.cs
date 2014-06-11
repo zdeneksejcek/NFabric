@@ -1,10 +1,10 @@
 ﻿using System;
+using NFabric.Contracts;
 
 namespace NFabric.Samples.Sales.Events.SalesOrder
 {
-    public class SalesOrderLinePricesChanged
+    public class SalesOrderLinePricesChanged : IEntityEvent
     {
-
         public Guid Line { get; private set; }
 
         public decimal UnitPrice { get; private set; }
@@ -21,5 +21,9 @@ namespace NFabric.Samples.Sales.Events.SalesOrder
             DiscountedPrice = discountedPrice;
         }
 
+        Guid IEntityEvent.EntityId
+        {
+            get { return Line; }
+        }
     }
 }

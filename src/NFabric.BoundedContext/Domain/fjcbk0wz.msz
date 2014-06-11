@@ -73,16 +73,14 @@ namespace NFabric.BoundedContext.Domain
                 Apply(e);
         }
 
-        private void ApplyUncommited(IEvent @event)
-        {
-            var handler = GetHandler(@event);
+        private void ApplyUncommited(IEvent @event) {
+            var handler = _handlers.FirstOrDefault(p => p.Type == @event.GetType());
             if (handler != null)
                 handler.Handle(@event);
         }
 
-        private void Apply(SequencedEvent @event)
-        {
-            var handler = GetHandler(@event.Event);
+        private void Apply(SequencedEvent @event) {
+            var handler = _handlers.FirstOrDefault(p => p.Type == @event.Event.GetType());
             if (handler != null)
             {
                 handler.Handle(@event.Event);
@@ -90,22 +88,6 @@ namespace NFabric.BoundedContext.Domain
             }
         }
 
-        private Handler GetHandler(IEvent @event)
-        {
-            Handler handler = null;
-
-            if (@event is IEntityEvent)
-                handler =
-                    _handlers.FirstOrDefault(
-                        p => p.Type == @event.GetType() && p.EntityId == ((IEntityEvent) @event).EntityId);
-
-            if (@event is IAggregateEvent)
-                handler = _handlers.FirstOrDefault(p => p.Type == @event.GetType());
-
-            if (handler == null)
-                throw new UnhandledEvent();
-
-            return handler;
-        }
+        private Handler
     }
 }

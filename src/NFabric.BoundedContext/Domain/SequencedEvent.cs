@@ -1,4 +1,5 @@
 ﻿using System;
+using NFabric.Contracts;
 
 namespace NFabric.BoundedContext.Domain
 {
@@ -7,10 +8,10 @@ namespace NFabric.BoundedContext.Domain
     {
         public Guid AggregateId { get; private set; }
         public int Sequence { get; private set; }
-        public object Event { get; private set; }
+        public IEvent Event { get; private set; }
         public DateTime CreatedOn { get; private set; }
 
-        public SequencedEvent(Guid aggregateId, int sequence, object @event, DateTime createdOn) {
+        public SequencedEvent(Guid aggregateId, int sequence, IEvent @event, DateTime createdOn) {
             AggregateId = aggregateId;
             Sequence = sequence;
             Event = @event;

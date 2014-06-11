@@ -8,10 +8,13 @@ namespace NFabric.BoundedContext.Domain
         public Type Type { get; private set; }
         public Action<object> Handle { get; private set; }
 
-        public Handler(Type @event, Action<object> handle)
+        public Guid? EntityId { get; private set; }
+
+        public Handler(Type @event, Guid? entityId, Action<object> handle)
         {
             Type = @event;
             Handle = handle;
+            EntityId = entityId;
         }
     }
 }

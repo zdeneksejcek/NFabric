@@ -1,5 +1,4 @@
 ﻿using System;
-using NFabric.Samples.Sales.Commands;
 using NFabric.Samples.Sales.Port;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +57,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         public void Apply(SalesOrderLineQuantityChanged @event)
         {
-            GetExistingLine(@event.Line).ChangeQuantity(@event.Quantity);
+            //GetExistingLine(@event.Line).ChangeQuantity(@event.Quantity);
         }
 
         #endregion
@@ -78,26 +77,6 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 
         #endregion
 
-        #region line price changed
-
-        public void ChangePrice(Guid line, LinePrices prices)
-        {
-            Events.Update(
-                new SalesOrderLinePricesChanged(
-                    line,
-                    prices.UnitPrice.Amount,
-                    prices.Discount,
-                    prices.DiscountedPrice.Amount));
-        }
-
-        private void Apply(SalesOrderLinePricesChanged @event)
-        {
-            GetExistingLine(@event.Line).ChangePrices(@event.UnitPrice, @event.Discount, @event.DiscountedPrice);
-        }
-
-        #endregion
-
-
         private SalesOrderLine GetExistingLine(Guid guid)
         {
             var line = this.FirstOrDefault(p => p.Id == guid);
@@ -108,12 +87,24 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
             return line;
         }
 
-
         protected override void InitializeEventHandlers()
         {
             Events.Handles<SalesOrderLineAdded>(Apply);
             Events.Handles<SalesOrderLineRemoved>(Apply);
             Events.Handles<SalesOrderLinesReordered>(Apply);
+
+            // line level events
+            //Events.Handles<SalesOrderLineQuantityChanged>(@event => );
         }
+
+        private void UpdateLine(Guid lineId, object @event)
+        {
+            var line = this.FirstOrDefault(p => p.Id == lineId);
+
+            //if (line != null)
+                
+
+        }
+
     }
 }

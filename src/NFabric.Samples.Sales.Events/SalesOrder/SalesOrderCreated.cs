@@ -1,12 +1,15 @@
 ﻿using System;
+using NFabric.Contracts;
 
 namespace NFabric.Samples.Sales.Events.SalesOrder
 {
     [Serializable]
-    public class SalesOrderCreated
+    public class SalesOrderCreated : IAggregateEvent
     {
         public Guid SalesOrderId { get; private set; }
-        public Guid Customer { get; private set;}
+
+        public Guid Customer { get; private set; }
+
         public Guid Warehouse { get; private set; }
 
         public DateTime OrderDate { get; private set; }

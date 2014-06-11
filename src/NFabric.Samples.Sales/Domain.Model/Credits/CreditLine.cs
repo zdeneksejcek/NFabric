@@ -8,6 +8,10 @@ namespace NFabric.Samples.Sales.Domain.Model.Credits
         public CreditLine(AggregateEvents events) : base(events)
         {
         }
+
+        protected override void InitializeEventHandlers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
-

@@ -9,5 +9,10 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         public InvoiceLine(AggregateEvents events) : base(events)
         {
         }
+
+        protected override void InitializeEventHandlers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
