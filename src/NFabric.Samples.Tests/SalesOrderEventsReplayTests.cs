@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using NFabric.BoundedContext.Domain;
+using NFabric.Contracts;
 using NFabric.Samples.Sales.Domain.Model.SalesOrders;
 using NFabric.Samples.Sales.Events.SalesOrder;
 using NUnit.Framework;
@@ -20,7 +23,7 @@ namespace NFabric.Samples.Tests
             list.Add(new SequencedEvent(aggId, 0, new SalesOrderCreated(aggId, Guid.NewGuid(), Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow, DateTime.UtcNow), DateTime.UtcNow));
             list.Add(new SequencedEvent(aggId, 1, new SalesOrderLineAdded(line1Id, Guid.NewGuid(), 5, "some stupid comments"), DateTime.UtcNow));
             list.Add(new SequencedEvent(aggId, 2, new SalesOrderLineQuantityChanged(line1Id, 6), DateTime.UtcNow));
-            //list.Add(new SequencedEvent(aggId, 1, new SalesOrderLinePricesChanged(line1Id, 50, 0, 50), DateTime.UtcNow));
+            list.Add(new SequencedEvent(aggId, 3, new SalesOrderLinePricesChanged(line1Id, new MonetaryValue(50, "NZD"), 0, new MonetaryValue(50, "NZD")), DateTime.UtcNow));
             
             return list;
         }
@@ -28,7 +31,9 @@ namespace NFabric.Samples.Tests
         [Test]
         public void Replay()
         {
-            var os = new SalesOrder(GetEvents());
+            var events = GetEvents().ToList();
+
+            var os = new SalesOrder(events);
         }
     }
 }

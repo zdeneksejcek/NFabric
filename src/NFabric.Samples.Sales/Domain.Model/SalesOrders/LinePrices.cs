@@ -1,5 +1,4 @@
 ﻿using NFabric.Contracts;
-using NFabric.Samples.Sales.Commands;
 
 namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
 {

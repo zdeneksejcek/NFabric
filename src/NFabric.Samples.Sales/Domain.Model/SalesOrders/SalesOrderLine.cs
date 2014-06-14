@@ -30,15 +30,17 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
             Events.Update(
                 new SalesOrderLinePricesChanged(
                     this.Id,
-                    prices.UnitPrice.Amount,
+                    prices.UnitPrice,
                     prices.Discount,
-                    prices.DiscountedPrice.Amount));
+                    prices.DiscountedPrice));
         }
 
         private void Apply(SalesOrderLinePricesChanged @event)
         {
-            //@event.UnitPrice.
-            //this.Prices = new LinePrices(@event.UnitPrice, @);
+            this.Prices = new LinePrices(
+                @event.UnitPrice,
+                @event.Discount,
+                @event.DiscountedPrice);
         }
 
         private void Apply(SalesOrderLineQuantityChanged @event)
@@ -51,6 +53,7 @@ namespace NFabric.Samples.Sales.Domain.Model.SalesOrders
         protected override void InitializeEventHandlers()
         {
             Events.Handles<SalesOrderLineQuantityChanged>(this.Id, Apply);
+            Events.Handles<SalesOrderLinePricesChanged>(this.Id, Apply);
         }
     }
 }
